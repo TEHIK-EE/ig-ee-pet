@@ -1,0 +1,1 @@
+Patsiendi elulõpu tahteavaldus
