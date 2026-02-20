@@ -24,7 +24,10 @@ publisher:
 # package id and the value is the version (or dev/current). For advanced
 # use cases, the value can be an object with keys for id, uri, and version.
 #
-# dependencies:
+dependencies:
+  ee.fhir.mpi: 1.5.0
+  ee.fhir.base: 1.3.0
+    # ee.fhir.spd: 0.2.0
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode
@@ -145,6 +148,12 @@ menu:
 # is specified by id or name, SUSHI will replace it with the correct
 # URL when generating the IG JSON.
 #
+groups:
+  ExternalExamples:
+    name: "Example: Example Instances from external systems"
+    description: "Example resources that are referenced in this IG, but are from external systems."
+    resources:
+      - Patient/200
 # groups:
 #   GroupA:
 #     name: Group A

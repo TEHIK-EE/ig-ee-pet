@@ -1,65 +1,59 @@
-Profile: PETDecision
+Profile: PETComposition
 Parent: Composition
-Id: pet
-Description: "Patsiendi elulõpu tahteavaladus"
-* ^experimental = false
-* ^abstract = true
-* modifierExtension ..0
-* implicitRules ..0
-* identifier 1..1
-* identifier.use ..0
-* identifier ^short = "Dokumendi number"
-* identifier.value 1..1
-* status ^short = "PET staatus"
-* type ^short = "Composition ressursi tüüp. Fikseeritud väärtus"
-* type.coding = $DT#96 "Patsiendi elulõpu tahteavaldus"
-* subject only Reference(Patient)
-* subject ^type.targetProfile = MpiPatientVerified
-* subject 1..1
-* subject ^short = "MPI Patient reference"
-* encounter ..0
-* date ^short = "PET koostamise aeg"
+Id: pet-composition
+Title: "Patsiendi elulõpu tahteavaldus"
+Description: "Kaasab endas fakte, kellele vormistati PET, tahteavalduse sisu, usaldusisik, tunnistaja, kas on saanud nõustatud mingi tahteavalduse staatust"
+* ^url = "https://fhir.ee/pet/StructureDefinition/pet-composition"
+* ^status = #draft
+* ^version = "1.0.0"
+
+* status 1..1
 * date 1..1
-* author 1..1
-* author ^short = "Viide contained PractitionerRole ressursile"
-* attester ..0
-* relatesTo ..0
+
+* type 1..1
+* title 1..1
+* title = "Patsiendi elulõpu tahteavaldus"
+
+* subject 1..1
+* subject only Reference(PETPatient)
+
+* author 1..*
+* author only Reference(PETPatient)
+
+* extension contains
+    PETDigitallyCreated named digitallyCreated 1..1 and
+    PETApprovalTime named approvalTime 0..1 
 
 
-// sections
-* section ^slicing.discriminator.type = #value
-* section ^slicing.discriminator.path = #code
+* section 1..*
+* section ^slicing.discriminator[0].type = #value
+* section ^slicing.discriminator[0].path = "title"
 * section ^slicing.rules = #open
-* section contains PETConsultation 0..1 and PETQuestionnaireResponse 1..1 and PETTrustee 0..1 and PETWitness 0..1
+* section contains
+    PETContent 1..1 and
+    PETCounseling 0..* and
+    PETTrusteeSection 0..1 and
+    PETWitnessSection 0..1
 
-* section[PETConsultation] ^short = "PET konsultatsiooni tulemus"
-* section[PETConsultation].entry 1..1
-* section[PETConsultation].entry only Reference(PETConsultation)
-* section[PETConsultation].modifierExtension ..0
+* section[PETContent].title 1..1
+* section[PETContent].title = "Tahteavalduse sisu"
+* section[PETContent].entry 1..1
+* section[PETContent].entry only Reference(PETQuestionnaireResponse)
 
-* section[PETQuestionnaireResponse] ^short = "Patsiendi elulõpu tahteavalduse sisu"
-* section[PETQuestionnaireResponse].entry 1..1
-* section[PETQuestionnaireResponse].modifierExtension ..0
-* section[PETQuestionnaireResponse].entry only Reference(PETQuestionnaireResponse)
-* section[PETQuestionnaireResponse].entry ^short = "Viide täidetud tahteavaldusele"
-* section[PETQuestionnaireResponse].entry.reference ^short = "Kanooniline viide tahteavaldusele (PET QuestionnaireResponse ressursile)"
-* section[PETQuestionnaireResponse].entry.identifier ..1
-* section[PETQuestionnaireResponse].entry.identifier ^short = "Tahteavalduse dokumendi number kui PET QuestionnaireResponse ressursile ei saa viidata"
-* section[PETQuestionnaireResponse].entry.identifier.use 0..0
-* section[PETQuestionnaireResponse].entry.identifier.value ^short = "Tahteavalduse dokumendi number välises infosüsteemis"
-* section[PETQuestionnaireResponse].entry.identifier.value 1..1
+* section[PETCounseling].title 1..1
+* section[PETCounseling].title = "Fakt nõustamisest"
+* section[PETCounseling].entry 0..*
+* section[PETCounseling].entry only Reference(Communication)
+* section[PETCounseling].entry ^type.targetProfile = Canonical(PETCounseling)
 
-* section[PETTrustee] ^short = "Usaldusisik"
-* section[PETTrustee].entry 0..1
-* section[PETTrustee].entry only Reference(PETTrustee)
-* section[PETTrustee].entry ^short = "Viide usaldusisikule"
-* section[PETTrustee].text 0..1
+* section[PETTrusteeSection].title 1..1
+* section[PETTrusteeSection].title = "Usaldusisik"
+* section[PETTrusteeSection].entry 0..1
+* section[PETTrusteeSection].entry only Reference(RelatedPerson)
+* section[PETTrusteeSection].entry ^type.targetProfile = "https://fhir.ee/pet/StructureDefinition/pet-trustee"
 
-
-* section[PETWitness] ^short = "Tunnistaja"
-* section[PETWitness].entry 0..1
-* section[PETWitness].entry only Reference(PETWitness)
-* section[PETWitness].entry ^short = "Viide tunnistajale"
-* section[PETWitness].text 1..1
-
-
+* section[PETWitnessSection].title 1..1
+* section[PETWitnessSection].title = "Tunnistaja"
+* section[PETWitnessSection].entry 0..1
+* section[PETWitnessSection].entry only Reference(RelatedPerson)
+* section[PETWitnessSection].entry ^type.targetProfile = "https://fhir.ee/pet/StructureDefinition/pet-witness"
