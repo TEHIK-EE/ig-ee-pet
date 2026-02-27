@@ -6,7 +6,7 @@
 id: ee.fhir.pet
 canonical: https://fhir.ee/pet
 name: PET-IG
-# title: Example Title
+title: Patsiendi elulõpu tahteavaldus
 # description: Example Implementation Guide for getting started with SUSHI
 status: draft # draft | active | retired | unknown
 version: 0.1.0
