@@ -1,9 +1,9 @@
-Profile: PETWitness
+Profile: AHDTrustee
 Parent: https://fhir.ee/mpi/StructureDefinition/ee-mpi-related-person
-Id: pet-witness
-Title: "Tunnistaja"
-Description: "Patsiendi poolt määratud tunnistaja (RelatedPerson) PET tahteavalduse kontekstis."
-* ^url = "https://fhir.ee/pet/StructureDefinition/pet-witness"
+Id: ahd-trustee
+Title: "Usaldusisik"
+Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson)."
+* ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 * ^status = #draft
 * ^version = "1.0.0"
 
@@ -15,3 +15,4 @@ Description: "Patsiendi poolt määratud tunnistaja (RelatedPerson) PET tahteava
 
 * identifier 1..*
 * name 1..1
+* telecom 1..*

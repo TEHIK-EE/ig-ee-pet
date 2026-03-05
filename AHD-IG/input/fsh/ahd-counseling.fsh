@@ -1,9 +1,9 @@
-Profile: PETCounseling
+Profile: AHDCounseling
 Parent: Communication
-Id: pet-counseling
+Id: ahd-counseling
 Title: "PET nõustamise fakt"
 Description: "Kirjeldab, kas patsient sai elulõpu tahteavalduse raames nõustatud ja kas on luba kinnitada PET."
-* ^url = "https://fhir.ee/pet/StructureDefinition/pet-counseling"
+* ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling"
 * ^status = #draft
 * ^version = "1.0.0"
 
@@ -12,7 +12,7 @@ Description: "Kirjeldab, kas patsient sai elulõpu tahteavalduse raames nõustat
 * status = #completed
 
 * subject 1..1
-* subject only Reference(PETPatient)
+* subject only Reference(AHDPatient)
 
 
 * sent 0..1
@@ -33,6 +33,6 @@ Description: "Kirjeldab, kas patsient sai elulõpu tahteavalduse raames nõustat
 
 
 * extension contains
-    PETAllowedToSign named allowedToSign 1..1 and
-    PETNotAllowedReason named notAllowedReason 0..1
+    AHDAllowedToSign named allowedToSign 1..1 and
+    AHDNotAllowedReason named notAllowedReason 0..1
 

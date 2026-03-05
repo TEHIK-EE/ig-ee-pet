@@ -1,6 +1,6 @@
-Profile: PETQuestionnaireResponse
+Profile: AHDQuestionnaireResponse
 Parent: QuestionnaireResponse
-Id: pet-content
+Id: ahd-content
 Description: "Patsiendi elulõpu tahteavalduse sisu"
 * ^version = "1.0.0"
 * ^status = #draft

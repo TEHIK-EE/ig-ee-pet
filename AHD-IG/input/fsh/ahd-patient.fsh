@@ -1,9 +1,9 @@
-Profile: PETPatient
+Profile: AHDPatient
 Parent: https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified
-Id: pet-patient
+Id: ahd-patient
 Title: "PET patsient"
 Description: "Patsient, kelle kohta tahteavaldus käib"
-* ^url = "https://fhir.ee/pet/StructureDefinition/pet-patient"
+* ^url = "https://fhir.ee/ahd/StructureDefinition/pahdet-patient"
 * ^status = #draft
 * ^version = "1.0.0"
 
