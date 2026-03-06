@@ -7,10 +7,10 @@ id: ee.fhir.ahd
 canonical: https://fhir.ee/ahd
 name: AHD-IG
 title: Patsiendi elulõpu tahteavaldus
-# description: Example Implementation Guide for getting started with SUSHI
+description: Implementation guide for Advanced Healthcare Directive in Estonia 
 status: draft # draft | active | retired | unknown
 version: 0.1.0
-fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
+fhirVersion: 5.0.0 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2026+
 releaseLabel: trial-use
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
@@ -18,7 +18,7 @@ releaseLabel: trial-use
 publisher:
   name: TEHIK
   url: https://tehik.ee
-  # email: test@example.org
+  email: abi@tehik.ee
 
 # The dependencies property corresponds to IG.dependsOn. The key is the
 # package id and the value is the version (or dev/current). For advanced
@@ -46,9 +46,9 @@ dependencies:
 # with supported extensions (e.g., .md/.xml) will be treated as
 # sub-pages.
 #
-# pages:
-#   index.md:
-#     title: Example Home
+pages:
+  index.md:
+    title: Home
 #   implementation.xml:
 #   examples.xml:
 #     title: Examples Overview

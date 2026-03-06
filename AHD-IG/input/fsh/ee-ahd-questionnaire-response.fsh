@@ -1,7 +1,7 @@
 Profile: AHDQuestionnaireResponse
 Parent: QuestionnaireResponse
 Id: ahd-content
-Description: "Patsiendi elulõpu tahteavalduse sisu"
+Title: "Patsiendi elulõpu tahteavalduse sisu"
 * ^version = "1.0.0"
 * ^status = #draft
 * ^date = "2024-01-01"
