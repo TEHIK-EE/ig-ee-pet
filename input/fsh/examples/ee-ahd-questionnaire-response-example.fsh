@@ -19,10 +19,10 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[=].answer[0].valueCoding.display = "ei soovi ma neid elu säilitavaid sekkumisi, mille olen ära märkinud"
 
 * item[=].item[=].item[0].linkId = "ahd-indication.first-choice.unacceptable-condition"
-* item[=].item[=].item[=].answer[0].valueCoding.display = "Olen püsivalt teadvusetus seisundis."
-* item[=].item[=].item[=].answer[+].valueCoding.display = "Minu vaimne võimekus on pöördumatult halvenenud nii, et ma ei ole suuteline aru saama, otsuseid tegema ega inimestega suhtlema."
-* item[=].item[=].item[=].answer[+].valueCoding.display = "Olen igapäevastes toimingutes (nt söömine, joomine, hügieenitoimingud, riietumine jne) täielikult teistest sõltuv."
-* item[=].item[=].item[=].answer[+].valueCoding.display = "Muu…[vaba tekst]"
+* item[=].item[=].item[=].answer[0].valueCoding.display = "ma jään püsivalt teadvusetusse seisundisse ehk koomasse"
+* item[=].item[=].item[=].answer[+].valueCoding.display = "minu vaimne võimekus halveneb pöördumatult, nii et ma ei ole suuteline oma seisundist aru saama, otsuseid tegema ega inimestega suhtlema"
+* item[=].item[=].item[=].answer[+].valueCoding.display = "ma sõltun igapäevatoimingutes (nt söömine, joomine, enesehooldus, riietumine jm) täielikult teistest inimestest"
+* item[=].item[=].item[=].answer[+].valueCoding.display = "Muu … [vaba tekst]"
 
 * item[=].item[=].item[=].item[0].linkId = "ahd-indication.first-choice.unacceptable-condition.other"
 * item[=].item[=].item[=].item[=].answer[0].valueString = "Kui ma ei suuda enam oma lähedasi ära tunda ega nendega suhelda."
@@ -31,22 +31,17 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[=].item[=].answer[0].valueCoding.display = "Elustamine kliinilisest surmast"
 * item[=].item[=].item[=].answer[+].valueCoding.display = "Hingamisaparaadi kasutamine"
 * item[=].item[=].item[=].answer[+].valueCoding.display = "Neeruasendusravi ehk dialüüs"
-* item[=].item[=].item[=].answer[+].valueCoding.display = "Kunstlik vedeliku manustamine ja toitmine"
-* item[=].item[=].item[=].answer[+].valueCoding.display = "Muu: …[vaba tekst]"
-
-* item[=].item[=].item[=].item[0].linkId = "ahd-indication.first-choice.unacceptable-treatments.other"
-* item[=].item[=].item[=].item[=].answer[0].valueString = "Loobun onkoloogilisest ravist"
-
+* item[=].item[=].item[=].answer[+].valueCoding.display = "Kunstlik toitmine ja kunstlik vedeliku manustamine"
 
 * item[+].linkId = "palliative-treatment"
-* item[=].answer[0].valueCoding.display = "Soovin palliatiivse ravi puhul vältida:....[vaba tekst]"
+* item[=].answer[0].valueCoding.display = "ei soovi selliseid sekkumisi [kirjelda ise]"
 
 * item[=].item[0].linkId = "palliative-treatment.treatments"
 * item[=].item[=].answer[0].valueString = "Soovin vältida tugevat sedatsiooni ja valuravi"
 
 
 * item[+].linkId = "preferred-death-location"
-* item[=].answer[0].valueCoding.display = "Mujal"
+* item[=].answer[0].valueCoding.display = "mujal: [vaba tekst] "
 
 * item[=].item[0].linkId = "preferred-death-location.other"
 * item[=].item[=].answer[0].valueString = "Hospiitsis või hooldekodus, kus lähedased saavad külastada."
