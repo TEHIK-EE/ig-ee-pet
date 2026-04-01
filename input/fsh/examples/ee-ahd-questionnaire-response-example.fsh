@@ -8,8 +8,8 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * status = #completed
 * questionnaire = "https://fhir.ee/qre/Questionnaire-AHD"
 * authored = "2026-02-19T10:30:00+02:00"
-* subject = Reference(PatientExample)
-* author = Reference(PatientExample)
+* subject = Reference(AHDPatientExample)
+* author = Reference(AHDPatientExample)
 * language = #et
 
 * item[0].linkId = "ahd-indication"

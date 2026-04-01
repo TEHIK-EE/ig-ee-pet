@@ -7,8 +7,8 @@ Description: "Patsient, kelle kohta tahteavaldus käib"
 * ^status = #draft
 * ^version = "1.0.0"
 
+* obeys ahd-patient-must-be-adult
+
 * active 1..1
-
 * identifier 1..*
-
 * name 1..*

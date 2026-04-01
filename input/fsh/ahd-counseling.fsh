@@ -1,36 +1,28 @@
-Profile: AHDCounseling
-Parent: Communication
+Profile: AHDCounselingEncounter
+Parent: Encounter
 Id: ahd-counseling
-Title: "PET nõustamise fakt"
-Description: "Kirjeldab, kas patsient sai elulõpu tahteavalduse raames nõustatud ja kas on luba kinnitada PET."
+Title: "PET nõustamise visiit"
+Description: "Nõustamise käigus toimunud tervishoiukohtumine PET vormistamise kontekstis."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling"
 * ^status = #draft
 * ^version = "1.0.0"
 
-
 * status 1..1
-* status = #completed
 
 * subject 1..1
-* subject only Reference(AHDPatient)
+* subject only Reference(Patient)
+* subject ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
 
+* serviceProvider 1..1
+* serviceProvider only Reference(Organization)
+* serviceProvider ^type.targetProfile = "https://fhir.ee/base/StructureDefinition/ee-organization"
 
-* sent 0..1
+* participant 1..*
+* participant.actor 1..1
+* participant.actor only Reference(PractitionerRole)
+* participant.actor ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling-hcp"
 
+* type 0..1
+* type.text = "AHD nõustamine"
 
-* sender 1..1
-* sender only Reference(PractitionerRole) //muutub SPDks kui valmis
-// * sender ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
-
-
-
-* payload 0..*
-  * content[x] 1..1
-  * content[x] only Attachment or Reference(Resource)
-
-
-* extension contains
-    AHDAllowedToSign named allowedToSign 1..1 and
-    AHDNotAllowedReason named notAllowedReason 0..1 and
-    AHDCounselingOrganization named counselingOrganization 1..1
-
+* actualPeriod 0..1

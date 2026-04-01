@@ -32,6 +32,7 @@ Description: "Kaasab endas fakte, kellele vormistati PET, tahteavalduse sisu, us
 * section contains
     AHDContent 1..1 and
     AHDCounseling 0..* and
+    AHDCounselingResult 0..* and
     AHDTrusteeSection 0..1 and
     AHDWitnessSection 0..1
 
@@ -43,8 +44,14 @@ Description: "Kaasab endas fakte, kellele vormistati PET, tahteavalduse sisu, us
 * section[AHDCounseling].title 1..1
 * section[AHDCounseling].title = "Fakt nõustamisest"
 * section[AHDCounseling].entry 0..*
-* section[AHDCounseling].entry only Reference(Communication)
-* section[AHDCounseling].entry ^type.targetProfile = Canonical(AHDCounseling)
+* section[AHDCounseling].entry only Reference(Encounter)
+* section[AHDCounseling].entry ^type.targetProfile = Canonical(AHDCounselingEncounter)
+
+* section[AHDCounselingResult].title 1..1
+* section[AHDCounselingResult].title = "Nõustamise tulemus"
+* section[AHDCounselingResult].entry 0..*
+* section[AHDCounselingResult].entry only Reference(Observation)
+* section[AHDCounselingResult].entry ^type.targetProfile = Canonical(AHDCounselingResult)
 
 * section[AHDTrusteeSection].title 1..1
 * section[AHDTrusteeSection].title = "Usaldusisik"
