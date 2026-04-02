@@ -33,7 +33,7 @@ Description: "Kaasab endas fakte, kellele vormistati PET, tahteavalduse sisu, us
     AHDContent 1..1 and
     AHDCounseling 0..* and
     AHDCounselingResult 0..* and
-    AHDTrusteeSection 0..1 and
+    // AHDTrusteeSection 0..1 and
     AHDWitnessSection 0..1
 
 * section[AHDContent].title 1..1
