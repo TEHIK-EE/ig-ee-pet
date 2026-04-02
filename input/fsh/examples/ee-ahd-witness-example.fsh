@@ -14,11 +14,11 @@ Description: "Näidis tunnistaja AHD kontekstis"
 
 
 * relationship[class][0].coding[0].code = #CON
-* relationship[class][0].coding[0].display = "Kontakt"
+* relationship[class][0].coding[0].display = "contact"
 
 
 * relationship[person].coding[0].code = #106328005
-* relationship[person].coding[0].display = "Sotsiaaltöötaja"
+* relationship[person].coding[0].display = "Social worker"
 
 * period.start = "2026-04-01"
 

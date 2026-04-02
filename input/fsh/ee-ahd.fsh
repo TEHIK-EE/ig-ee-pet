@@ -53,11 +53,11 @@ Description: "Kaasab endas fakte, kellele vormistati PET, tahteavalduse sisu, us
 * section[AHDCounselingResult].entry only Reference(Observation)
 * section[AHDCounselingResult].entry ^type.targetProfile = Canonical(AHDCounselingResult)
 
-* section[AHDTrusteeSection].title 1..1
-* section[AHDTrusteeSection].title = "Usaldusisik"
-* section[AHDTrusteeSection].entry 0..1
-* section[AHDTrusteeSection].entry only Reference(RelatedPerson)
-* section[AHDTrusteeSection].entry ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
+// * section[AHDTrusteeSection].title 1..1
+// * section[AHDTrusteeSection].title = "Usaldusisik"
+// * section[AHDTrusteeSection].entry 0..1
+// * section[AHDTrusteeSection].entry only Reference(RelatedPerson)
+// * section[AHDTrusteeSection].entry ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
 * section[AHDWitnessSection].title 1..1
 * section[AHDWitnessSection].title = "Tunnistaja"

@@ -30,9 +30,9 @@ Description: "Näidis PET Composition"
 * section[AHDCounselingResult].title = "Nõustamise tulemus"
 * section[AHDCounselingResult].entry[0] = Reference(AHDCounselingResultExample)
 
-// Usaldusisik
-* section[AHDTrusteeSection].title = "Usaldusisik"
-* section[AHDTrusteeSection].entry[0] = Reference(AHDTrusteeExample)
+// // Usaldusisik
+// * section[AHDTrusteeSection].title = "Usaldusisik"
+// * section[AHDTrusteeSection].entry[0] = Reference(AHDTrusteeExample)
 
 // Tunnistaja
 * section[AHDWitnessSection].title = "Tunnistaja"

@@ -17,10 +17,10 @@ Description: "Näidis usaldusisik AHD kontekstis"
 * name.given[0] = "Mari"
 
 * relationship[class][0].coding[0].code = #CON
-* relationship[class][0].coding[0].display = "Kontakt"
+* relationship[class][0].coding[0].display = "contact"
 
 * relationship[person].coding[0].code = #394863008
-* relationship[person].coding[0].display = "Mitte-pereliige"
+* relationship[person].coding[0].display = "Non-family member"
 
 * period.start = "2026-04-01"
 
