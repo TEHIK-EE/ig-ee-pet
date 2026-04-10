@@ -14,9 +14,9 @@ Description: "Nõustamise tulemus: kas patsiendil on lubatud PET kinnitada, ja k
 * subject only Reference(Patient)
 * subject ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
 
-* encounter 1..1
-* encounter only Reference(Encounter)
-* encounter ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling"
+    // * encounter 1..1
+    // * encounter only Reference(Encounter)
+    // * encounter ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling"
 
 * code 1..1
 * code.text = "Luba kinnitada PET"

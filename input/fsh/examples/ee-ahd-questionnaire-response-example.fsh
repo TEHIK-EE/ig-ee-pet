@@ -10,6 +10,9 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * author = Reference(AHDPatientExample)
 * language = #et
 
+* extension[signedDigitally].valueBoolean = true
+* extension[witness].valueReference = Reference(AHDWitnessExample)
+
 
 * item[0].linkId = "ahd-indication"
 * item[=].answer[0].valueCoding.display = "Kui mu terviseseisund on selline, et mulle vastuvõetava elukvaliteedi saavutamine minu elu säilitamisega ei ole võimalik"
