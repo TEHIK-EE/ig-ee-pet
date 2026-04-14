@@ -1,7 +1,7 @@
 Profile: AHDQuestionnaireResponse
 Parent: QuestionnaireResponse
 Id: ahd-content
-Title: "Patsiendi elulõpu tahteavalduse sisu"
+Title: "Patsiendi elulõpu tahteavaldus"
 Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-content"
 * ^version = "1.0.0"
@@ -33,7 +33,8 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 
 * extension contains
     AHDWitnessReference named witness 0..1 and
-    AHDSignedDigitally named signedDigitally 1..1
+    AHDSignedDigitally named signedDigitally 1..1 and
+    AHDDigitallyCreated named createdDigitally 1..1
 
 * item 0..*
   * id 0..0

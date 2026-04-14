@@ -8,7 +8,7 @@ Description: "Näidis PET nõustamise tulemus, kus patsiendil ei ole lubatud PET
 
 * status = #final
 * subject = Reference(AHDPatientExample)
-* encounter = Reference(AHDCounselingEncounterExample)
+
 
 * code.text = "Luba kinnitada PET"
 

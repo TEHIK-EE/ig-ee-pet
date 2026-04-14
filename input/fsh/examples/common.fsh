@@ -13,20 +13,6 @@ Title: "Patsient Pauliine Jänes"
   * given = "Pauliine"
   * family = "Jänes"
 
-Instance: AHDCounselingHCPExample
-InstanceOf: AHDCounselingHCP
-Usage: #example
-Description: "Näidis arst, kes viib läbi PET nõustamise"
-
-* id = "ahd-counseling-hcp-example"
-
-* identifier.system = "https://fhir.ee/sid/pro/tervishoiutootaja-kood"
-* identifier.value = "D12345"
-
-* practitioner = Reference(PractitionerExample)
-* organization = Reference(OrganizationExample)
-
-* specialty.text = "Perearst"
  
 
  Instance: PractitionerExample

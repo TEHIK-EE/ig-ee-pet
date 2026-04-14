@@ -12,6 +12,7 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 
 * extension[signedDigitally].valueBoolean = true
 * extension[witness].valueReference = Reference(AHDWitnessExample)
+* extension[createdDigitally].valueBoolean = true
 
 
 * item[0].linkId = "ahd-indication"
