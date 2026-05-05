@@ -14,8 +14,10 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * extension[witness].valueReference = Reference(AHDWitnessExample)
 * extension[createdDigitally].valueBoolean = true
 
+* item[0].linkId = "pet-indication"
+* item[=].answer.valueCoding.display = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
 
-* item[0].linkId = "pet-indication-first"
+* item[+].linkId = "pet-indication-first"
 * item[=].text = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
 
 
@@ -42,7 +44,7 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[=].answer[0].valueString = "Kui olen soovimatu seisundi korral koduses keskkonnas, siis ei soovi kiirabiga transporti haiglasse"
 
 * item[+].linkId = "palliative-treatment"
-* item[=].answer[0].valueCoding.display = "ei soovi selliseid sekkumisi [kirjelda ise]"
+* item[=].answer[0].valueCoding.display = "ei soovi selliseid sekkumisi"
 
 * item[=].item[0].linkId = "palliative-treatment.treatments"
 * item[=].item[=].answer[0].valueString = "Soovin vältida tugevat sedatsiooni ja valuravi"
