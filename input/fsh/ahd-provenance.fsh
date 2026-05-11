@@ -27,7 +27,7 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 
 * recorded 0..0
 * occurred[x] 1..1
-* occurredDateTime 1..1
+* occurredDateTime 0..1
 * occurredPeriod 0..0
 
 

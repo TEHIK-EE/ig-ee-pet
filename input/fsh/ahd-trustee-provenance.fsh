@@ -30,7 +30,7 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 
 * recorded 0..0
 * occurred[x] 1..1
-* occurredDateTime 1..1
+* occurredDateTime 0..1
 * occurredPeriod 0..0
 
 * agent 1..*
