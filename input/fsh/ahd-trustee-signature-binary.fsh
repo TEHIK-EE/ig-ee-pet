@@ -1,9 +1,8 @@
-Profile: AHDSignedBinary
+Profile: AHDTrusteeSignedBinary
 Parent: Binary
-Id: ahd-signed-binary
-Title: "Allkirjastatud PET vorm"
-Description: "Allkirjastatud PET vorm asice containeris"
-* ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signed-binary"
+Id: ahd-trustee-signed-binary
+Title: "Allkirjastatud nõusolek usaldusisikuks olemiseks"
+* ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-binary"
 * ^status = #draft
 * ^version = "1.0.0"
 

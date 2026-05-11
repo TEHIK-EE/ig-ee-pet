@@ -5,24 +5,23 @@ Title: "Usaldusisiku näidis"
 Description: "Näidis usaldusisik AHD kontekstis"
 
 * id = "ahd-trustee-example"
+* meta.profile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
+
 * active = true
 
+* extension[questionnaireResponse].valueReference = Reference(AHDQuestionnaireResponseExample)
+
 * patient = Reference(AHDPatientExample)
+
+* relationship.coding[0].system = "https://fhir.ee/ValueSet/isiku-seos-patsiendiga"
+* relationship.coding[0].code = #CON
 
 * identifier[0].system = "https://fhir.ee/sid/pid/est/ni"
 * identifier[0].value = "47505020022"
 
-* name.use = #official
-* name.family = "Maasikas"
-* name.given[0] = "Mari"
-
-* relationship[class][0].coding[0].code = #CON
-* relationship[class][0].coding[0].display = "contact"
-
-* relationship[person].coding[0].code = #394863008
-* relationship[person].coding[0].display = "Non-family member"
-
-* period.start = "2026-04-01"
+* name[0].use = #official
+* name[0].family = "Maasikas"
+* name[0].given[0] = "Mari"
 
 * telecom[0].system = #phone
 * telecom[0].value = "+37251234567"

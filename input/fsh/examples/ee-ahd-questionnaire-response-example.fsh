@@ -1,24 +1,24 @@
 Instance: AHDQuestionnaireResponseExample
 InstanceOf: AHDQuestionnaireResponse
 Usage: #example
+Title: "PET vorm täidetud (näidis)"
 Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 
 * status = #completed
-* questionnaire = "https://fhir.ee/qre/Questionnaire-AHD"
-* authored = "2026-02-19T10:30:00+02:00"
+* questionnaire = "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
 * subject = Reference(AHDPatientExample)
 * author = Reference(AHDPatientExample)
+
 * language = #et
 
 * extension[signedDigitally].valueBoolean = true
 * extension[witness].valueReference = Reference(AHDWitnessExample)
-* extension[createdDigitally].valueBoolean = true
+    // * extension[createdDigitally].valueBoolean = true
 
 * item[0].linkId = "pet-indication"
 * item[=].answer.valueCoding.display = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
 
 * item[+].linkId = "pet-indication-first"
-* item[=].text = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
 
 
 * item[=].item[0].linkId = "pet-indication-first.unacceptable-treatment"

@@ -7,5 +7,5 @@ Description: "Tunnistaja, kui patsiendi tahteavalduse kinnitamisel on tunnistaja
 * ^version = "1.0.0"
 
 * value[x] 1..1
-* value[x] only Reference(RelatedPerson)
+* value[x] only Reference(Patient)
 * valueReference ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-witness"

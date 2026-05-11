@@ -8,33 +8,42 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * ^status = #draft
 * ^date = "2024-01-01"
 
+* id 0..1
+* meta.versionId 0..1
+* meta.lastUpdated 0..1
 * meta.profile 1..1
-* questionnaire 1..1
-* language 1..1
-* status 1..1
-* authored 1..1
 
-* basedOn 0..0
-* partOf 0..0
-* encounter 0..0
-* modifierExtension 0..0
-* contained 0..0
-* implicitRules 0..0
-// * text 0..0
+* language 1..1
+
+* extension contains
+    AHDWitnessReference named witness 0..1 and
+    AHDSignedDigitally named signedDigitally 0..1
+
+
+* questionnaire 1..1
+* questionnaire ^type.targetProfile = "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
+
+* status 1..1
 
 * subject 1..1
 * subject only Reference(Patient)
 * subject ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
 
 * author 1..1
-* author only Reference(Patient)
-* author ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* author only Reference(Patient or PractitionerRole)
+
+* source 0..0
+* identifier 0..0
+* authored 0..0
+* source 0..0
+* basedOn 0..0
+* partOf 0..0
+* encounter 0..0
+* modifierExtension 0..0
+* contained 0..0
+* implicitRules 0..0
 
 
-* extension contains
-    AHDWitnessReference named witness 0..1 and
-    AHDSignedDigitally named signedDigitally 1..1 and
-    AHDDigitallyCreated named createdDigitally 1..1
 
 * item 0..*
   * id 0..0

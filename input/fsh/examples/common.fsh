@@ -24,7 +24,7 @@ Description: "Näidis arst, kes võib läbi viia PET nõustamise"
 * id = "practitioner-example"
 * active = true
 
-* identifier[0].system = "https://example.ee/fhir/sid/hcp-person-id"
+* identifier[0].system = "https://fhir.ee/sid/pid/est/ni"
 * identifier[0].value = "38101010021"
 
 * name[0].use = #official
