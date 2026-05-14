@@ -27,7 +27,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 
 * subject 1..1
 * subject only Reference(Patient)
-* subject ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* subject ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * author 1..1
 * author only Reference(Patient or PractitionerRole)

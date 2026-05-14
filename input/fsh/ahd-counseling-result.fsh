@@ -19,7 +19,7 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 
 * subject 1..1
 * subject only Reference(Patient)
-* subject ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* subject ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * encounter 0..1
 * encounter only Reference(Encounter)

@@ -20,7 +20,7 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * active 1..1
 
 * patient 1..1
-* patient only Reference(AHDPatient)
+* patient only Reference(Patient)
 * patient ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * relationship.coding 1..1

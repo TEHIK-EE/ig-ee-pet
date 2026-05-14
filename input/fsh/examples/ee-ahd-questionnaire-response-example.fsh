@@ -13,7 +13,7 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 
 * extension[signedDigitally].valueBoolean = true
 * extension[witness].valueReference = Reference(AHDWitnessExample)
-    // * extension[createdDigitally].valueBoolean = true
+
 
 * item[0].linkId = "pet-indication"
 * item[=].answer.valueCoding.display = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
