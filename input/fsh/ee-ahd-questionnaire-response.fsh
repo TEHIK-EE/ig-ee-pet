@@ -14,6 +14,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * meta.profile 1..1
 
 * language 1..1
+* language from AHDLanguageVS (required)
 
 * extension contains
     AHDWitnessReference named witness 0..1 and
@@ -24,6 +25,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * questionnaire ^type.targetProfile = "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
 
 * status 1..1
+* status from AHDQuestionnaireResponseStatusVS (required)
 
 * subject 1..1
 * subject only Reference(Patient)
@@ -31,8 +33,9 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 
 * author 1..1
 * author only Reference(Patient or PractitionerRole)
+* author ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+* author ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
 
-* source 0..0
 * identifier 0..0
 * authored 0..0
 * source 0..0

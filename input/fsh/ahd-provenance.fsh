@@ -23,29 +23,30 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 
 * patient 1..1
 * patient only Reference(Patient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* patient ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * recorded 0..0
 * occurred[x] 1..1
-* occurredDateTime 0..1
-* occurredPeriod 0..0
+* occurred[x] only dateTime
 
 
-* agent 1..*
+* agent 1..1
 * agent.role 1..1
 * agent.role.coding.system = "https://fhir.ee/ValueSet/allkirjastaja-roll" //Uus loend
 
 * agent.who 1..1
 * agent.who only Reference(Patient)
-* agent.who ^type.targetProfile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* agent.who ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 * agent.who ^type.targetProfile[+] = "https://fhir.ee/ahd/StructureDefinition/ahd-witness"
 
 * agent.onBehalfOf 0..1
 * agent.onBehalfOf only Reference(Patient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* agent.onBehalfOf ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 
-* entity 0..*
+
+
+* entity 0..1
 * entity.role 1..1
 * entity.role = #source
 

@@ -1,7 +1,7 @@
-Instance: AHDCounselingResultExample
+Instance: AHDCounselingNegativeResultExample
 InstanceOf: AHDCounselingResult
 Usage: #example
-Title: "Nõustamise otsuse näidis"
+Title: "Nõustamise otsuse näidis - negatiivne"
 Description: "Näidis PET nõustamise otsus, kus patsiendil ei ole lubatud PET allkirjastada"
 
 * id = "ahd-counseling-result-example"
@@ -9,10 +9,12 @@ Description: "Näidis PET nõustamise otsus, kus patsiendil ei ole lubatud PET a
 
 * status = #final
 * subject = Reference(AHDPatientExample)
-* encounter.reference = "Encounter/ahd-counseling-encounter-example"
-* performer[0].reference = "PractitionerRole/ahd-counseling-practitioner-example"
+* encounter = Reference(Encounter/ahd-counseling-encounter-example)
+* performer[0] = Reference(PractitionerRole/ahd-counseling-practitioner-example)
 
 * code.text = "Luba kinnitada PET"
+
+* effectiveInstant = "2026-05-26T10:30:00+02:00"
 
 * valueBoolean = false
 

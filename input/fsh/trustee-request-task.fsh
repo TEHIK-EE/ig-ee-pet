@@ -16,16 +16,20 @@ Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi
 * code.text = "Usaldusisikuks olemise kinnitamine"
 
 * focus 1..1 
-* focus only Reference(RelatedPerson)
+* focus only Reference(AHDTrustee)
 * focus.identifier 0..1
 
 
 * for 1..1
 * for only Reference(Patient)
+* for ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * requester 1..1 
 * requester only Reference(Patient or PractitionerRole)
+* requester ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+* requester ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
+
 
 * requestedPerformer 1..1
 * requestedPerformer.reference.identifier 0..1
-* requestedPerformer only CodeableReference(RelatedPerson)
+* requestedPerformer only CodeableReference(AHDTrustee)

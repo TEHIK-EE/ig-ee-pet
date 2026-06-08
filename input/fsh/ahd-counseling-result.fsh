@@ -7,15 +7,20 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * ^status = #draft
 * ^version = "1.0.0"
 
+* obeys ahd-counseling-reason
+
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
 * meta.profile 1..1
 
 * status 1..1
+* status from AHDCounselingResultStatusVS (required)
 
 * code 1..1
 * code.text = "Luba kinnitada PET"
+
+* effectiveInstant 1..1
 
 * subject 1..1
 * subject only Reference(Patient)
@@ -26,13 +31,17 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 
 * performer 1..1
 * performer only Reference(PractitionerRole)
+* performer ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
+
 
 * value[x] 1..1
 * value[x] only boolean
 
 * component 0..1
+* component ^condition[+] = "ahd-counseling-reason"
 * component.code 1..1
 * component.value[x] 1..1
-* component.value[x] only CodeableConcept // Uus loend
+* component.value[x] only CodeableConcept
 
 * note 0..1
+* note ^condition[+] = "ahd-counseling-reason"
