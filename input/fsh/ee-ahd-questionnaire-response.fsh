@@ -8,6 +8,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * ^status = #draft
 * ^date = "2024-01-01"
 
+// Unused base QuestionnaireResponse elements
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
@@ -42,6 +43,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * basedOn 0..0
 * partOf 0..0
 * encounter 0..0
+* text 0..0
 * modifierExtension 0..0
 * contained 0..0
 * implicitRules 0..0

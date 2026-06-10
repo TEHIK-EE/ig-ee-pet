@@ -7,6 +7,13 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * ^status = #draft
 * ^version = "1.0.0"
 
+// Unused base Provenance elements
+* implicitRules 0..0
+* language 0..0
+* text 0..0
+* contained 0..0
+* extension 0..0
+* modifierExtension 0..0
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
@@ -29,6 +36,12 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * occurred[x] 1..1
 * occurred[x] only dateTime
 
+* policy 0..0
+* location 0..0
+* authorization 0..0
+* activity 0..0
+* basedOn 0..0
+* encounter 0..0
 
 * agent 1..1
 * agent.role 1..1
@@ -53,6 +66,7 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * entity.what 1..1
 * entity.what only Reference(Binary)
 
+* signature 0..0
 
 
 

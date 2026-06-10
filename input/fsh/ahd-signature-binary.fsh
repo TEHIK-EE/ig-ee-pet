@@ -7,6 +7,9 @@ Description: "Allkirjastatud PET vorm asice containeris"
 * ^status = #draft
 * ^version = "1.0.0"
 
+// Unused base Binary elements
+* implicitRules 0..0
+* language 0..0
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
@@ -14,6 +17,6 @@ Description: "Allkirjastatud PET vorm asice containeris"
 
 * contentType 1..1
 * contentType = #application/vnd.etsi.asic-e+zip
+* securityContext 0..0
 
 * data 1..1
-

@@ -6,10 +6,16 @@ Title: "Usaldusisiku edastamine koos paberallkirja andmetega"
 * ^status = #draft
 * ^version = "1.0.0"
 
+// Unused base Bundle elements
+* implicitRules 0..0
+* language 0..0
+* identifier 0..0
 * type 1..1
 * type = #collection
 
 * timestamp 1..1
+* total 0..0
+* link 0..0
 
 * entry 2..*
 * entry.resource 1..1
@@ -28,3 +34,6 @@ Title: "Usaldusisiku edastamine koos paberallkirja andmetega"
 * entry[provenance].fullUrl 0..1
 * entry[provenance].resource 1..1
 * entry[provenance].resource only AHDTrusteeSignatureProvenance
+
+* signature 0..0
+* issues 0..0
