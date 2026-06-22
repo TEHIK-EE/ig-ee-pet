@@ -17,8 +17,15 @@ Title: "Usaldusisiku edastamine koos paberallkirja andmetega"
 * total 0..0
 * link 0..0
 
-* entry 2..*
+* entry 2..2
 * entry.resource 1..1
+* entry.id 0..0
+* entry.extension 0..0
+* entry.modifierExtension 0..0
+* entry.link 0..0
+* entry.search 0..0
+* entry.request 0..0
+* entry.response 0..0
 
 * entry ^slicing.discriminator[0].type = #profile
 * entry ^slicing.discriminator[0].path = "resource"

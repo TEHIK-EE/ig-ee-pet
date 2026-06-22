@@ -10,6 +10,7 @@ Description: "Näidis usaldusisik AHD kontekstis"
 * active = true
 
 * extension[questionnaireResponse].valueReference = Reference(AHDQuestionnaireResponseExample)
+* extension[status].valueCode = #completed
 
 * patient = Reference(AHDPatientExample)
 

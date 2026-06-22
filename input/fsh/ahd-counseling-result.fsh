@@ -31,6 +31,10 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 
 * category 0..0
 * code 1..1
+* code.id 0..0
+* code.extension 0..0
+* code.coding 0..0
+* code.text 1..1
 * code.text = "Luba kinnitada PET"
 
 * effectiveInstant 1..1
@@ -45,8 +49,8 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 
 * issued 0..0
 * performer 1..1
-* performer only Reference(PractitionerRole)
-* performer ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
+* performer only Reference(Practitioner)
+* performer ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner"
 
 
 * value[x] 1..1
@@ -55,6 +59,8 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * dataAbsentReason 0..0
 * interpretation 0..0
 * note 0..1
+* note.time 0..0
+* note.author[x] 0..0
 * note ^condition[+] = "ahd-counseling-reason"
 * bodySite 0..0
 * bodyStructure 0..0

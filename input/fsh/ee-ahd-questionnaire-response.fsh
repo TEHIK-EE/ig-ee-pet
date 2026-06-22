@@ -33,9 +33,9 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * subject ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * author 1..1
-* author only Reference(Patient or PractitionerRole)
+* author only Reference(Patient or Practitioner)
 * author ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-* author ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
+* author ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner"
 
 * identifier 0..0
 * authored 0..0

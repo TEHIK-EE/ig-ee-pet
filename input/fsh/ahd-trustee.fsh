@@ -18,8 +18,9 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * meta.lastUpdated 0..1
 * meta.profile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
+* extension 2..2
 * extension contains
-    AHDQuestionnaireResponseReference named questionnaireResponse 1..1
+    AHDQuestionnaireResponseReference named questionnaireResponse 1..1 and AHDTrusteeStatus named status 1..1
 
 * identifier 1..*
 
@@ -29,9 +30,20 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * patient only Reference(Patient)
 * patient ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
+* relationship 1..1
+* relationship.id 0..0
+* relationship.extension 0..0
+* relationship.text 0..0
 * relationship.coding 1..1
-* relationship.coding.system = "https://fhir.ee/ValueSet/isiku-seos-patsiendiga"
+* relationship.coding.code 1..1
 * relationship.coding.code = #CON
+* relationship.coding.system 1..1
+* relationship.coding.system = "https://fhir.ee/ValueSet/isiku-seos-patsiendiga"
+* relationship.coding.id 0..0
+* relationship.coding.extension 0..0
+* relationship.coding.version 0..0
+* relationship.coding.userSelected 0..0
+
 
 
 * name 0..1
