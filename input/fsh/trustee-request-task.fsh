@@ -7,12 +7,18 @@ Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi
 
 * implicitRules 0..0
 * language 0..0
-* text 1..1
+* text 0..1
 * contained 0..0
 * extension 0..0
 * modifierExtension 0..0
 * id 0..1
 * meta.versionId 0..1
+
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 
 * identifier 0..0
 * instantiatesCanonical 0..0
@@ -52,9 +58,9 @@ Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi
 * lastModified 0..0
 
 * requester 1..1 
-* requester only Reference(Patient or Practitioner)
+* requester only Reference(Patient or PractitionerRole)
 * requester ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-* requester ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner"
+* requester ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
 
 
 * requestedPerformer 1..1

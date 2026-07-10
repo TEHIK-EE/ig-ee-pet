@@ -7,6 +7,11 @@ Description: "Patsiendi poolt määratud tunnistaja (Person) PET tahteavalduse k
 * ^status = #draft
 * ^version = "1.0.0"
 
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 // Unused base Person elements
 * implicitRules 0..0
 * language 0..0

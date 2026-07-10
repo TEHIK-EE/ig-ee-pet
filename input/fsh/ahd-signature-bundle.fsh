@@ -8,11 +8,20 @@ Description: "Komplekt ressurssidest nagu PET vorm (questionnaireResponse) ja Pr
 * ^version = "1.0.0"
 
 // Unused base Bundle elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
+* meta.versionId 0..0
+* meta.lastUpdated 0..0
+* id 0..0
 * implicitRules 0..0
 * language 0..0
 * identifier 0..0
 * type 1..1
 * type = #collection
+* meta.profile 1..1
 
 * timestamp 1..1
 * total 0..0

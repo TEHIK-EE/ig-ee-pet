@@ -8,6 +8,11 @@ Description: "Allkirjastatud PET vorm asice containeris"
 * ^version = "1.0.0"
 
 // Unused base Binary elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * id 0..1

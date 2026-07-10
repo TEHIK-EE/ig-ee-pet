@@ -8,6 +8,11 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * ^version = "1.0.0"
 
 // Unused base Provenance elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * text 0..0
@@ -54,7 +59,8 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * agent.role.text  0..0
 * agent.role.coding.system 1..1
 * agent.role.coding.code 1..1
-* agent.role.coding.system = "https://fhir.ee/ValueSet/allkirjastaja-roll" //Uus loend
+* agent.role.coding.system = "http://hl7.org/fhir/ValueSet/participation-role-type" //fhir loend
+// * agent.role.coding.code = legal ehk tunnistaja või datasubject ehk patsient
 * agent.role.coding.id 0..0
 * agent.role.coding.extension 0..0
 * agent.role.coding.version 0..0

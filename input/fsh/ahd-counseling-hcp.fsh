@@ -10,6 +10,11 @@ Description: "Tervishoiutöötaja roll, kes viib läbi PET nõustamise. Peab ole
 * obeys ahd-counselor-must-be-doctor
 
 // Unused base PractitionerRole elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * text 0..0

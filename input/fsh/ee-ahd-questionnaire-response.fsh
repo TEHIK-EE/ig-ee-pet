@@ -13,10 +13,16 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
 * meta.profile 1..1
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 
 * language 1..1
 * language from AHDLanguageVS (required)
 
+* extension 0..2
 * extension contains
     AHDWitnessReference named witness 0..1 and
     AHDSignedDigitally named signedDigitally 0..1
@@ -33,9 +39,9 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * subject ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * author 1..1
-* author only Reference(Patient or Practitioner)
+* author only Reference(Patient or PractitionerRole)
 * author ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-* author ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner"
+* author ^type.targetProfile[1] = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
 
 * identifier 0..0
 * authored 0..0

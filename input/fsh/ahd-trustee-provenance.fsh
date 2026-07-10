@@ -8,6 +8,11 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * ^version = "1.0.0"
 
 // Unused base Provenance elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * text 0..0
@@ -34,8 +39,8 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 
 * recorded 0..0
 * occurred[x] 1..1
-* occurredDateTime 0..1
-* occurredPeriod 0..0
+* occurred[x] only dateTime
+
 
 * policy 0..0
 * location 0..0
@@ -55,7 +60,8 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * agent.role.text 0..0
 * agent.role.coding 1..1
 * agent.role.coding.system 1..1
-* agent.role.coding.system = "https://fhir.ee/ValueSet/allkirjastaja-roll" //Uus loend
+* agent.role.coding.system = "http://hl7.org/fhir/ValueSet/participation-role-type" //FHIR loend
+* agent.role.coding.code = #datasubject
 * agent.role.coding.code 1..1
 * agent.role.coding.id 0..0
 * agent.role.coding.extension 0..0 
@@ -63,16 +69,14 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * agent.role.coding.userSelected 0..0
 
 * agent.who 1..1
-* agent.who only Reference(Patient or RelatedPerson)
-* agent.who ^type.targetProfile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* agent.who only Reference(RelatedPerson)
 * agent.who ^type.targetProfile[+] = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
-* agent.onBehalfOf 0..1
-* agent.onBehalfOf only Reference(Patient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/ahd/StructureDefinition/ahd-patient"
+* agent.onBehalfOf 0..0
 
 
-* entity 0..*
+
+* entity 0..1
 * entity.id 0..0
 * entity.extension 0..0
 * entity.modifierExtension 0..0

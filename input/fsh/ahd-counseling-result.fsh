@@ -10,6 +10,11 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * obeys ahd-counseling-reason
 
 // Unused base Observation elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * text 0..0
@@ -49,8 +54,8 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 
 * issued 0..0
 * performer 1..1
-* performer only Reference(Practitioner)
-* performer ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner"
+* performer only Reference(PractitionerRole)
+* performer ^type.targetProfile = "https://fhir.ee/spd/StructureDefinition/ee-spd-practitioner-role"
 
 
 * value[x] 1..1
@@ -59,6 +64,8 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * dataAbsentReason 0..0
 * interpretation 0..0
 * note 0..1
+* note.id 0..0
+* note.extension 0..0
 * note.time 0..0
 * note.author[x] 0..0
 * note ^condition[+] = "ahd-counseling-reason"

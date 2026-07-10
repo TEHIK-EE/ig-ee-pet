@@ -8,6 +8,11 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * ^version = "1.0.0"
 
 // Unused base RelatedPerson elements
+* meta.id 0..0
+* meta.extension 0..0
+* meta.source 0..0
+* meta.security 0..0
+* meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
 * text 0..0
@@ -16,6 +21,7 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
+* meta.profile 1..1
 * meta.profile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
 * extension 2..2
