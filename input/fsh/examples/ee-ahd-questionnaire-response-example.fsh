@@ -16,13 +16,13 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 
 
 * item[0].linkId = "pet-indication"
-* item[=].answer.valueCoding.display = "Elu säilitamisest keeldumine, kui selle tulemus on sulle vastuvõetamatu"
+* item[=].answer.valueCoding.display = "Elu säilitavast ravist keeldumine, kui selle tulemus on mulle vastuvõetamatu"
 
 * item[+].linkId = "pet-indication-first"
 
 
 * item[=].item[0].linkId = "pet-indication-first.unacceptable-treatment"
-* item[=].item[=].answer[0].valueCoding.display = "ei soovi ma järgmisi elu säilitavaid sekkumisi"
+* item[=].item[=].answer[0].valueCoding.display = "Ei soovi ma järgmisi elu säilitavaid sekkumisi"
 
 * item[=].item[=].item[0].linkId = "pet-indication-first.unacceptable-treatment.list"
 * item[=].item[=].item[=].answer[0].valueCoding.display = "Elustamine kliinilisest surmast"
@@ -32,10 +32,10 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 
 
 * item[=].item[+].linkId = "pet-indication-first.unacceptable-condition"
-* item[=].item[=].answer[0].valueCoding.display = "ma jään püsivalt teadvusetusse seisundisse ehk koomasse"
-* item[=].item[=].answer[1].valueCoding.display = "minu vaimne võimekus halveneb pöördumatult, nii et ma ei ole suuteline oma seisundist aru saama, otsuseid tegema ega inimestega suhtlema"
-* item[=].item[=].answer[2].valueCoding.display = "ma sõltun igapäevatoimingutes (nt söömine, joomine, enesehooldus, riietumine jm) täielikult teistest inimestest"
-* item[=].item[=].answer[3].valueCoding.display = "muu"
+* item[=].item[=].answer[0].valueCoding.display = "Ma jään püsivalt teadvusetusse seisundisse ehk koomasse"
+* item[=].item[=].answer[1].valueCoding.display = "Minu vaimne võimekus halveneb pöördumatult, nii et ma ei ole suuteline oma seisundist aru saama, otsuseid tegema ega inimestega suhtlema"
+* item[=].item[=].answer[2].valueCoding.display = "Ma sõltun igapäevatoimingutes (nt söömine, joomine, enesehooldus, riietumine jm) täielikult teistest inimestest"
+* item[=].item[=].answer[3].valueCoding.display = "Muu"
 
 * item[=].item[=].item[0].linkId = "pet-indication-first.unacceptable-condition.other"
 * item[=].item[=].item[=].answer[0].valueString = "Kui ma ei suuda enam oma lähedasi ära tunda ega nendega suhelda."
@@ -44,13 +44,13 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[=].answer[0].valueString = "Kui olen soovimatu seisundi korral koduses keskkonnas, siis ei soovi kiirabiga transporti haiglasse"
 
 * item[+].linkId = "palliative-treatment"
-* item[=].answer[0].valueCoding.display = "ei soovi selliseid sekkumisi"
+* item[=].answer[0].valueCoding.display = "Ei soovi selliseid sekkumisi"
 
 * item[=].item[0].linkId = "palliative-treatment.treatments"
 * item[=].item[=].answer[0].valueString = "Soovin vältida tugevat sedatsiooni ja valuravi"
 
 * item[+].linkId = "preferred-death-location"
-* item[=].answer[0].valueCoding.display = "muu"
+* item[=].answer[0].valueCoding.display = "Muu"
 
 * item[=].item[0].linkId = "preferred-death-location.other"
 * item[=].item[=].answer[0].valueString = "Hospiitsis või hooldekodus, kus lähedased saavad külastada."
