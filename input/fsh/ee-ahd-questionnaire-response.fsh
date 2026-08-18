@@ -6,7 +6,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-content"
 * ^version = "1.0.0"
 * ^status = #draft
-* ^date = "2024-01-01"
+* ^date = "2026-07-14"
 
 // Unused base QuestionnaireResponse elements
 * id 0..1
@@ -22,14 +22,15 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * language 1..1
 * language from AHDLanguageVS (required)
 
-* extension 0..2
-* extension contains
+
+* extension contains 
     AHDWitnessReference named witness 0..1 and
     AHDSignedDigitally named signedDigitally 0..1
+* extension ^slicing.rules = #closed
 
 
 * questionnaire 1..1
-* questionnaire ^type.targetProfile = "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
+* questionnaire = "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
 
 * status 1..1
 * status from AHDQuestionnaireResponseStatusVS (required)

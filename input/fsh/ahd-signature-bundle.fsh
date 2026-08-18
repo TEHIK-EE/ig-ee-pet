@@ -39,7 +39,7 @@ Description: "Komplekt ressurssidest nagu PET vorm (questionnaireResponse) ja Pr
 
 * entry ^slicing.discriminator[0].type = #profile
 * entry ^slicing.discriminator[0].path = "resource"
-* entry ^slicing.rules = #open
+* entry ^slicing.rules = #closed
 * entry contains
   QRContent 1..1 and
   provenance 1..1

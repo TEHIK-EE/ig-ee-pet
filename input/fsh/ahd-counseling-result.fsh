@@ -42,7 +42,8 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * code.text 1..1
 * code.text = "Luba kinnitada PET"
 
-* effectiveInstant 1..1
+* effective[x] 1..1
+* effective[x] only instant
 
 * subject 1..1
 * subject only Reference(Patient)

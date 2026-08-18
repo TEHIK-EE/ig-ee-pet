@@ -1,4 +1,4 @@
 Invariant: ahd-counseling-reason
-Description: "Kui valueBoolean=false, siis põhjus (note) peab olema esitatud. Kui valueBoolean = true, siis põhjendust vaja ei ole"
+Description: "Kui valueBoolean=false, siis põhjus (note) peab olema esitatud. Kui valueBoolean = true, siis põhjendust vaja ei ole (kuid põhjenudsei ole ka keelatud sellel juhul)"
 Severity: #error
-Expression: "(valueBoolean = false implies note.exists()) and (valueBoolean = true implies  note.empty())"
+Expression: "(value.ofType(boolean) = false implies note.exists())"

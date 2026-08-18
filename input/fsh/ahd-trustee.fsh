@@ -27,6 +27,7 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * extension 2..2
 * extension contains
     AHDQuestionnaireResponseReference named questionnaireResponse 1..1 and AHDTrusteeStatus named status 1..1
+* extension ^slicing.rules = #closed
 
 * identifier 1..*
 
@@ -44,7 +45,7 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * relationship.coding.code 1..1
 * relationship.coding.code = #CON
 * relationship.coding.system 1..1
-* relationship.coding.system = "https://fhir.ee/ValueSet/isiku-seos-patsiendiga"
+* relationship.coding.system = "https://fhir.ee/CodeSystem/olemi-seos"
 * relationship.coding.id 0..0
 * relationship.coding.extension 0..0
 * relationship.coding.version 0..0

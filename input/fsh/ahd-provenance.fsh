@@ -31,7 +31,7 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * target contains
     QRContent 1..1 
 * target[QRContent] only Reference(QuestionnaireResponse)
-* target[QRContent] ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-content|1.0.0"
+* target[QRContent] ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-content"
 
 * patient 1..1
 * patient only Reference(Patient)
@@ -54,13 +54,14 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * agent.modifierExtension 0..0
 * agent.type 0..0
 * agent.role 1..1
+* agent.role from AHDSignerRoleVS (required)
 * agent.role.id 0..0 
 * agent.role.extension 0..0
 * agent.role.text  0..0
+* agent.role.coding 1..1
 * agent.role.coding.system 1..1
 * agent.role.coding.code 1..1
-* agent.role.coding.system = "http://hl7.org/fhir/ValueSet/participation-role-type" //fhir loend
-// * agent.role.coding.code = legal ehk tunnistaja või datasubject ehk patsient
+* agent.role.coding.display 1..1
 * agent.role.coding.id 0..0
 * agent.role.coding.extension 0..0
 * agent.role.coding.version 0..0

@@ -5,6 +5,8 @@ Description: "Näitab, kas tahteavaldus allkirjastati digitaalselt."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signed-digitally"
 * ^status = #draft
 * ^version = "1.0.0"
+* ^context[0].type = #element
+* ^context[0].expression = "QuestionnaireResponse"
 
 * value[x] 1..1
 * value[x] only boolean

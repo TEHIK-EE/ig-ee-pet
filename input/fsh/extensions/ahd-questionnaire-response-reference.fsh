@@ -5,6 +5,8 @@ Description: "Viide PETile, millega usaldusisik on seotud."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-questionnaire-response-reference"
 * ^status = #draft
 * ^version = "1.0.0"
+* ^context[0].type = #element
+* ^context[0].expression = "RelatedPerson"
 
 * value[x] 1..1
 * value[x] only Reference(QuestionnaireResponse)

@@ -14,7 +14,7 @@ Description: "Näidis usaldusisik AHD kontekstis"
 
 * patient = Reference(AHDPatientExample)
 
-* relationship.coding[0].system = "https://fhir.ee/ValueSet/isiku-seos-patsiendiga"
+* relationship.coding[0].system = "https://fhir.ee/CodeSystem/olemi-seos"
 * relationship.coding[0].code = #CON
 
 * identifier[0].system = "https://fhir.ee/sid/pid/est/ni"

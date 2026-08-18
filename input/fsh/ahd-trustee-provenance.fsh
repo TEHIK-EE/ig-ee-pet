@@ -35,7 +35,7 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 
 * patient 1..1
 * patient only Reference(EEMPIPatient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/StructureDefinition/ee-mpi-patient-verified"
+* patient ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * recorded 0..0
 * occurred[x] 1..1
@@ -49,7 +49,7 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * basedOn 0..0
 * encounter 0..0
 
-* agent 1..*
+* agent 1..1
 * agent.id 0..0 
 * agent.extension 0..0
 * agent.modifierExtension 0..0
@@ -60,7 +60,8 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * agent.role.text 0..0
 * agent.role.coding 1..1
 * agent.role.coding.system 1..1
-* agent.role.coding.system = "http://hl7.org/fhir/ValueSet/participation-role-type" //FHIR loend
+* agent.role.coding.system = "http://hl7.org/fhir/CodeSystem/participation-role-type" //FHIR loend
+* agent.role.coding.display 1..1
 * agent.role.coding.code = #datasubject
 * agent.role.coding.code 1..1
 * agent.role.coding.id 0..0

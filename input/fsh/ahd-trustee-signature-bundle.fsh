@@ -38,14 +38,14 @@ Title: "Usaldusisiku edastamine koos paberallkirja andmetega"
 
 * entry ^slicing.discriminator[0].type = #profile
 * entry ^slicing.discriminator[0].path = "resource"
-* entry ^slicing.rules = #open
+* entry ^slicing.rules = #closed
 * entry contains
   trustee 1..1 and
   provenance 1..1
 
 * entry[trustee].fullUrl 0..1
 * entry[trustee].resource 1..1
-* entry[trustee].resource only RelatedPerson
+* entry[trustee].resource only AHDTrustee
 
 * entry[provenance].fullUrl 0..1
 * entry[provenance].resource 1..1
