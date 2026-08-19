@@ -27,6 +27,8 @@ Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi
 * groupIdentifier 0..0
 * partOf 0..0
 * status 1..1
+
+
 * statusReason 0..0
 * businessStatus 0..0
 
