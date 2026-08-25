@@ -15,14 +15,13 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
-* text 0..0
+* text 0..1
 * contained 0..0
 * modifierExtension 0..0
 * id 0..1
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
 * meta.profile 1..1
-* meta.profile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
 * extension 2..2
 * extension contains

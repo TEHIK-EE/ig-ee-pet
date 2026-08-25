@@ -7,10 +7,10 @@ Description: "Usaldusisiku lubatud staatused, alamhulk FHIR task-status koodisü
 * ^version = "1.0.0"
 * ^experimental = false
 
-* http://hl7.org/fhir/CodeSystem/task-status#requested "Requested"
-* http://hl7.org/fhir/CodeSystem/task-status#completed "Completed"
-* http://hl7.org/fhir/CodeSystem/task-status#rejected  "Rejected"
-* http://hl7.org/fhir/CodeSystem/task-status#cancelled "Cancelled"
+* http://hl7.org/fhir/task-status#requested "Requested"
+* http://hl7.org/fhir/task-status#completed "Completed"
+* http://hl7.org/fhir/task-status#rejected  "Rejected"
+* http://hl7.org/fhir/task-status#cancelled "Cancelled"
 
 * ^compose.include[0].concept[0].designation[0].language = #et
 * ^compose.include[0].concept[0].designation[0].use = http://terminology.hl7.org/CodeSystem/designation-usage#display

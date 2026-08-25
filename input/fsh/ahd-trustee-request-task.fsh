@@ -3,6 +3,10 @@ Parent: Task
 Id: trustee-request-task
 Title: "Usaldusisiku kutse"
 Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi elulõputahteavalduse usaldusisik"
+* ^url = "https://fhir.ee/ahd/StructureDefinition/trustee-request-task"
+* ^status = #draft
+* ^version = "1.0.0"
+
 
 
 * implicitRules 0..0
@@ -27,6 +31,8 @@ Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi
 * groupIdentifier 0..0
 * partOf 0..0
 * status 1..1
+* status from AHDTrusteeRequestTaskStatusVS (required)
+
 
 
 * statusReason 0..0

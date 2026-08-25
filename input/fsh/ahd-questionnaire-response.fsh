@@ -21,7 +21,7 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 
 * language 1..1
 * language from AHDLanguageVS (required)
-
+* text 0..1
 
 * extension contains 
     AHDWitnessReference named witness 0..1 and

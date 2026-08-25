@@ -55,13 +55,14 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * agent.modifierExtension 0..0
 * agent.type 0..0
 * agent.role 1..1
+* agent.role from AHDSignerRoleVS (required)
 * agent.role.id 0..0 
 * agent.role.extension 0..0
 * agent.role.text 0..0
 * agent.role.coding 1..1
 * agent.role.coding.system 1..1
-* agent.role.coding.system = "http://hl7.org/fhir/CodeSystem/participation-role-type" //FHIR loend
 * agent.role.coding.display 1..1
+* agent.role.coding.display = "Data Subject"
 * agent.role.coding.code = #datasubject
 * agent.role.coding.code 1..1
 * agent.role.coding.id 0..0

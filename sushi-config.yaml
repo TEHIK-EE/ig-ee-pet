@@ -27,7 +27,14 @@ publisher:
 dependencies:
   ee.fhir.mpi: 1.5.0
   ee.fhir.base: 1.3.0
-    # ee.fhir.spd: 0.2.0
+  ee.fhir.spd:
+    id: eespd
+    version: current
+    uri: https://build.fhir.org/ig/TEHIK-EE/ig-ee-spd/ImplementationGuide-ee.fhir.spd.json
+  ee.fhir.qre:
+    id: eeqre
+    version: current
+    uri: https://build.fhir.org/ig/TEHIK-EE/ig-ee-qre/ImplementationGuide-ee.fhir.qre.json
 #   hl7.fhir.us.core: 3.1.0
 #   hl7.fhir.us.mcode:
 #     id: mcode

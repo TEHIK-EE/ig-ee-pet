@@ -17,7 +17,6 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
-* text 0..0
 * contained 0..0
 * extension 0..0
 * modifierExtension 0..0
@@ -25,7 +24,7 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * meta.versionId 0..1
 * meta.lastUpdated 0..1
 * meta.profile 1..1
-
+* text 0..1
 * identifier 0..0
 * instantiates[x] 0..0
 * basedOn 0..0

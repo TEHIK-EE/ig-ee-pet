@@ -24,11 +24,11 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[0].linkId = "pet-indication-first.unacceptable-treatment"
 * item[=].item[=].answer[0].valueCoding.display = "Ei soovi ma järgmisi elu säilitavaid sekkumisi"
 
-* item[=].item[=].item[0].linkId = "pet-indication-first.unacceptable-treatment.list"
-* item[=].item[=].item[=].answer[0].valueCoding.display = "Elustamine kliinilisest surmast"
-* item[=].item[=].item[=].answer[1].valueCoding.display = "Hingamisaparaadi kasutamine"
-* item[=].item[=].item[=].answer[2].valueCoding.display = "Neeruasendusravi ehk dialüüs"
-* item[=].item[=].item[=].answer[3].valueCoding.display = "Kunstlik toitmine ja kunstlik vedeliku manustamine"
+* item[=].item[=].answer[=].item[0].linkId = "pet-indication-first.unacceptable-treatment.list"
+* item[=].item[=].answer[=].item[=].answer[0].valueCoding.display = "Elustamine kliinilisest surmast"
+* item[=].item[=].answer[=].item[=].answer[1].valueCoding.display = "Hingamisaparaadi kasutamine"
+* item[=].item[=].answer[=].item[=].answer[2].valueCoding.display = "Neeruasendusravi ehk dialüüs"
+* item[=].item[=].answer[=].item[=].answer[3].valueCoding.display = "Kunstlik toitmine ja kunstlik vedeliku manustamine"
 
 
 * item[=].item[+].linkId = "pet-indication-first.unacceptable-condition"
@@ -37,8 +37,8 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[=].item[=].answer[2].valueCoding.display = "Ma sõltun igapäevatoimingutes (nt söömine, joomine, enesehooldus, riietumine jm) täielikult teistest inimestest"
 * item[=].item[=].answer[3].valueCoding.display = "Muu"
 
-* item[=].item[=].item[0].linkId = "pet-indication-first.unacceptable-condition.other"
-* item[=].item[=].item[=].answer[0].valueString = "Kui ma ei suuda enam oma lähedasi ära tunda ega nendega suhelda."
+* item[=].item[=].answer[=].item[0].linkId = "pet-indication-first.unacceptable-condition.other"
+* item[=].item[=].answer[=].item[=].answer[0].valueString = "Kui ma ei suuda enam oma lähedasi ära tunda ega nendega suhelda."
 
 * item[=].item[+].linkId = "pet-indication-first.other"
 * item[=].item[=].answer[0].valueString = "Kui olen soovimatu seisundi korral koduses keskkonnas, siis ei soovi kiirabiga transporti haiglasse"
@@ -46,14 +46,14 @@ Description: "Näidis vastus patsiendi elulõpu tahteavaldusele (PET)"
 * item[+].linkId = "palliative-treatment"
 * item[=].answer[0].valueCoding.display = "Ei soovi selliseid sekkumisi"
 
-* item[=].item[0].linkId = "palliative-treatment.treatments"
-* item[=].item[=].answer[0].valueString = "Soovin vältida tugevat sedatsiooni ja valuravi"
+* item[=].answer[=].item[0].linkId = "palliative-treatment.treatments"
+* item[=].answer[=].item[=].answer[0].valueString = "Soovin vältida tugevat sedatsiooni ja valuravi"
 
 * item[+].linkId = "preferred-death-location"
 * item[=].answer[0].valueCoding.display = "Muu"
 
-* item[=].item[0].linkId = "preferred-death-location.other"
-* item[=].item[=].answer[0].valueString = "Hospiitsis või hooldekodus, kus lähedased saavad külastada."
+* item[=].answer[=].item[0].linkId = "preferred-death-location.other"
+* item[=].answer[=].item[=].answer[0].valueString = "Hospiitsis või hooldekodus, kus lähedased saavad külastada."
 
 * item[+].linkId = "people-by-side-death"
 * item[=].answer[0].valueString = "Mari Maasikas (abikaasa), tel +372 5xxxxxxx; Pauliine Jänes (tütar), tel +372 5xxxxxxx."
