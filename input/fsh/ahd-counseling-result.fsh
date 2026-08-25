@@ -20,16 +20,19 @@ Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui
 * contained 0..0
 * extension 0..0
 * modifierExtension 0..0
-* id 0..1
-* meta.versionId 0..1
-* meta.lastUpdated 0..1
-* meta.profile 1..1
-* text 0..1
 * identifier 0..0
 * instantiates[x] 0..0
 * basedOn 0..0
 * triggeredBy 0..0
 * partOf 0..0
+
+
+* id 0..1
+* meta.versionId 0..1
+* meta.lastUpdated 0..1
+* meta.profile 1..1
+* text 0..1
+
 * status 1..1
 * status from AHDCounselingResultStatusVS (required)
 
