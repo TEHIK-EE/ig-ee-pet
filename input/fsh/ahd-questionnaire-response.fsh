@@ -9,16 +9,17 @@ Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
 * ^date = "2026-07-14"
 
 // Unused base QuestionnaireResponse elements
-* id 0..1
-* meta.versionId 0..1
-* meta.lastUpdated 0..1
-* meta.profile 1..1
+
 * meta.id 0..0
 * meta.extension 0..0
 * meta.source 0..0
 * meta.security 0..0
 * meta.tag 0..0
 
+* id 0..1
+* meta.versionId 0..1
+* meta.lastUpdated 0..1
+* meta.profile 1..1
 * language 1..1
 * language from AHDLanguageVS (required)
 * text 0..1
