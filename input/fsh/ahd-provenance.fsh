@@ -2,10 +2,11 @@ Profile: AHDSignatureProvenance
 Parent: Provenance
 Id: ahd-signature-provenance
 Title: "PET provenance"
-Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (QuestionnaireResponse) kui ka Binary artifakt"
+Description: "Allkirjastamise provenance profiil. Target on PET vorm (QuestionnaireResponse); allkirjastatud Binary artifakt on seotud entity.what kaudu."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signature-provenance"
 * ^status = #draft
 * ^version = "1.0.0"
+* ^experimental = false
 
 // Unused base Provenance elements
 * meta.id 0..0
@@ -15,7 +16,7 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
-* text 0..0
+* text 0..1
 * contained 0..0
 * extension 0..0
 * modifierExtension 0..0
@@ -25,17 +26,10 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * meta.profile 1..1
 
 * target 1..1
-* target ^slicing.discriminator[0].type = #profile
-* target ^slicing.discriminator[0].path = "$this"
-* target ^slicing.rules = #open
-* target contains
-    QRContent 1..1 
-* target[QRContent] only Reference(QuestionnaireResponse)
-* target[QRContent] ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-content"
+* target only Reference(AHDQuestionnaireResponse)
 
 * patient 1..1
-* patient only Reference(Patient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+* patient only Reference(https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified)
 
 * recorded 0..0
 * occurred[x] 1..1
@@ -61,17 +55,15 @@ Description: "Allkirjastamise provenance profiil, mille target on nii PET vorm (
 * agent.role.coding 1..1
 * agent.role.coding.system 1..1
 * agent.role.coding.code 1..1
-* agent.role.coding.display 1..1
 * agent.role.coding.id 0..0
 * agent.role.coding.extension 0..0
 * agent.role.coding.version 0..0
 * agent.role.coding.userSelected 0..0
 
 
+
 * agent.who 1..1
-* agent.who only Reference(Patient)
-* agent.who ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
-* agent.who ^type.targetProfile[+] = "https://fhir.ee/ahd/StructureDefinition/ahd-witness"
+* agent.who only Reference(https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified or AHDWitness)
 
 * agent.onBehalfOf 0..1
 * agent.onBehalfOf only Reference(Patient)

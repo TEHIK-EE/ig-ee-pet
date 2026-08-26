@@ -25,17 +25,11 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * meta.profile 1..1
 
 * target 1..1
-* target ^slicing.discriminator[0].type = #profile
-* target ^slicing.discriminator[0].path = "$this"
-* target ^slicing.rules = #open
-* target contains Trustee 1..1
+* target only Reference(AHDTrustee)
 
-* target[Trustee] only Reference(RelatedPerson)
-* target[Trustee] ^type.targetProfile = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 
 * patient 1..1
-* patient only Reference(EEMPIPatient)
-* patient ^type.targetProfile[0] = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
+* patient only Reference(https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified)
 
 * recorded 0..0
 * occurred[x] 1..1
@@ -60,19 +54,17 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * agent.role.extension 0..0
 * agent.role.text 0..0
 * agent.role.coding 1..1
-* agent.role.coding.system 1..1
-* agent.role.coding.display 1..1
-* agent.role.coding.display = "Data Subject"
-* agent.role.coding.code = #datasubject
-* agent.role.coding.code 1..1
 * agent.role.coding.id 0..0
-* agent.role.coding.extension 0..0 
+* agent.role.coding.extension 0..0
 * agent.role.coding.version 0..0
 * agent.role.coding.userSelected 0..0
+* agent.role.coding.system 1..1
+* agent.role.coding.code 1..1
+* agent.role.coding.display 0..1
+* agent.role.coding = http://terminology.hl7.org/CodeSystem/extra-security-role-type#datasubject
 
 * agent.who 1..1
-* agent.who only Reference(RelatedPerson)
-* agent.who ^type.targetProfile[+] = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
+* agent.who only Reference(AHDTrustee)
 
 * agent.onBehalfOf 0..0
 

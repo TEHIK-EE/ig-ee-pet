@@ -6,4 +6,4 @@ Description: "Allkirjastaja roll: patsient (datasubject) või tunnistaja (legal)
 * ^version = "1.0.0"
 * ^experimental = false
 * http://terminology.hl7.org/CodeSystem/extra-security-role-type#datasubject "Data Subject"
-* http://terminology.hl7.org/CodeSystem/provenance-participant-type#legal     "Legal Authenticator"
+* http://terminology.hl7.org/CodeSystem/provenance-participant-type#legal "Legal Authenticator"
