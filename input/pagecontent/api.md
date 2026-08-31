@@ -194,9 +194,12 @@ Accept: application/fhir+json
     "resource": {
       "resourceType": "QuestionnaireResponse",
       "id": "ahd123",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] },
+      "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0",
       "status": "completed",
       "subject": { "reference": "Patient/123" },
-      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] }
+      "author": { "reference": "Patient/123" },
+      "language": "et"
     }
   }]
 }
@@ -211,9 +214,11 @@ Content-Type: application/fhir+json
 {
   "resourceType": "QuestionnaireResponse",
   "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] },
+  "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0",
   "status": "in-progress",
   "subject": { "reference": "Patient/123" },
-  "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0"
+  "author": { "reference": "Patient/123" },
+  "language": "et"
 }
 ```
 
@@ -284,12 +289,15 @@ Content-Type: application/fhir+json
   "resourceType": "Observation",
   "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-counseling-result"] },
   "status": "final",
+  "code": { "text": "Luba kinnitada PET" },
   "subject": { "reference": "Patient/123" },
-  "effectiveDateTime": "2026-08-31T10:00:00+03:00"
+  "effectiveInstant": "2026-08-31T10:00:00+03:00",
+  "performer": [{ "reference": "PractitionerRole/77" }],
+  "valueBoolean": true
 }
 ```
 
-Successful creation returns HTTP 201 and the stored Observation.
+Successful creation returns HTTP 201 and the stored Observation with its assigned `id` and version metadata.
 
 ### Search and accept a trusted-person invitation
 
@@ -333,7 +341,28 @@ Content-Type: application/fhir+json
       "resourceType": "Bundle",
       "type": "collection",
       "entry": [
-        { "resource": { "resourceType": "RelatedPerson", "patient": { "reference": "Patient/123" } } },
+        {
+          "resource": {
+            "resourceType": "RelatedPerson",
+            "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee"] },
+            "extension": [
+              {
+                "url": "https://fhir.ee/ahd/StructureDefinition/ahd-questionnaire-response-reference",
+                "valueReference": { "reference": "QuestionnaireResponse/ahd123" }
+              },
+              {
+                "url": "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-status",
+                "valueCode": "completed"
+              }
+            ],
+            "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "49002010965" }],
+            "active": true,
+            "patient": { "reference": "Patient/123" },
+            "relationship": [{
+              "coding": [{ "system": "https://fhir.ee/CodeSystem/olemi-seos", "code": "CON" }]
+            }]
+          }
+        },
         { "resource": { "resourceType": "Provenance" } }
       ]
     }
@@ -353,9 +382,11 @@ Content-Type: application/fhir+json
   "resourceType": "Task",
   "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/trustee-request-task"] },
   "status": "requested",
-  "intent": "order",
-  "focus": { "reference": "QuestionnaireResponse/ahd123" },
+  "intent": "proposal",
+  "code": { "text": "Usaldusisikuks olemise kinnitamine" },
+  "focus": { "reference": "RelatedPerson/ahd900" },
   "for": { "reference": "Patient/123" },
+  "requester": { "reference": "Patient/123" },
   "requestedPerformer": [{ "reference": { "reference": "RelatedPerson/ahd900" } }]
 }
 ```
@@ -390,8 +421,23 @@ Accept: application/fhir+json
     "resource": {
       "resourceType": "RelatedPerson",
       "id": "ahd900",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee"] },
+      "extension": [
+        {
+          "url": "https://fhir.ee/ahd/StructureDefinition/ahd-questionnaire-response-reference",
+          "valueReference": { "reference": "QuestionnaireResponse/ahd123" }
+        },
+        {
+          "url": "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-status",
+          "valueCode": "completed"
+        }
+      ],
+      "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "49002010965" }],
       "active": true,
-      "patient": { "reference": "Patient/123" }
+      "patient": { "reference": "Patient/123" },
+      "relationship": [{
+        "coding": [{ "system": "https://fhir.ee/CodeSystem/olemi-seos", "code": "CON" }]
+      }]
     },
     "search": { "mode": "match" }
   }]
