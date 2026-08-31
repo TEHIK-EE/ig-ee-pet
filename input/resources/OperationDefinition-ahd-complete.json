@@ -9,7 +9,7 @@
   "kind": "operation",
   "experimental": false,
   "publisher": "TEHIK",
-  "description": "UC-AHD-055: confirms a patient's end-of-life directive (PET). Input is exactly one of: a digitally signed PET as a Binary (signedBinary) or a QuestionnaireResponse and Provenance collection Bundle for paper signing (bundle).",
+  "description": "UC-AHD-055: confirms a patient's end-of-life directive (PET). Input is exactly one of: a digitally signed PET as a Binary (signedBinary) or a QuestionnaireResponse and Provenance collection Bundle for paper signing (bundle). Under the stage-1 mock configuration, the digital path parses the ASiC-E container without DigiDoc signature verification and stores it locally instead of DRIT. Where digital signing is not enabled, the digital path responds with HTTP 501.",
   "affectsState": true,
   "code": "complete",
   "resource": ["QuestionnaireResponse"],

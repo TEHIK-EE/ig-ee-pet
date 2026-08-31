@@ -43,9 +43,11 @@ Search parameters:
 | `_page` | `0..1` | One-based page number. |
 | `_summary` | `0..1` | `true` or `false`. `true` omits answers and tags the result `SUBSETTED`. |
 | `_sort` | `0..1` | `_lastUpdated` (alias `date`) and `_id`; prefix with `-` for descending order. |
-| `_lastUpdated` | `0..1` | Resource version update time. |
+| `_revinclude` | `0..1` | Supported value: `Provenance:target`; includes the PET signature metadata when available. |
 
-Unsupported `_include`, `_revinclude`, `_elements`, `_contained` and `_containedType` parameters produce an `OperationOutcome`.
+QuestionnaireResponse does not support filtering by `_lastUpdated`; that field is available only as a sort key.
+
+Unsupported `_include`, `_elements`, `_contained` and `_containedType` parameters produce an `OperationOutcome`. Other `_revinclude` values are rejected.
 
 ### Observation (counselling decision)
 
@@ -129,6 +131,10 @@ Search parameters:
 
 `Patient` appears in the CapabilityStatement only to resolve chained `patient.identifier` searches. PET does not expose Patient resource interactions.
 
+## Digital signing stage
+
+Digital completion of a PET and digital acceptance of a trusted-person invitation use an ASiC-E container in the `signedBinary` parameter. In the packaged stage-1 mock configuration (`AHD_STAGE1_MOCK=true`), the service parses the container without DigiDoc signature verification and stores it locally instead of DRIT. This mode is for stage-1 development and must not be treated as production signature validation. If the mock is disabled before the stage-2 DigiDoc and DRIT integrations are available, these digital operations fail closed with HTTP 501.
+
 ## Request and response examples
 
 The examples below are trimmed, illustrative excerpts. Production request bodies must conform to the linked profiles, and requests must include the environment-specific authorization and tracing headers.
@@ -136,7 +142,7 @@ The examples below are trimmed, illustrative excerpts. Production request bodies
 ### Search PETs
 
 ```http
-GET /ahd/fhir/QuestionnaireResponse?patient=Patient/123&status=completed&_count=20&_sort=-_lastUpdated
+GET /ahd/fhir/QuestionnaireResponse?patient=Patient/123&status=completed&_count=20&_sort=-_lastUpdated&_revinclude=Provenance:target
 Accept: application/fhir+json
 ```
 
