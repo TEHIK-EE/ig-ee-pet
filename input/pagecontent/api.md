@@ -135,6 +135,44 @@ Search parameters:
 
 Digital completion of a PET and digital acceptance of a trusted-person invitation use an ASiC-E container in the `signedBinary` parameter. In the packaged stage-1 mock configuration (`AHD_STAGE1_MOCK=true`), the service parses the container without DigiDoc signature verification and stores it locally instead of DRIT. This mode is for stage-1 development and must not be treated as production signature validation. If the mock is disabled before the stage-2 DigiDoc and DRIT integrations are available, these digital operations fail closed with HTTP 501.
 
+## Common behavior and business rules
+
+- Every interaction is authorized separately for the patient, representative,
+  healthcare-worker, or trusted-person role. Access to one patient's resource does
+  not grant access to another patient.
+- Patient references are checked against the caller's session and MPI identity.
+- PET update and deletion are limited to permitted pre-filled states. Confirmation
+  and cancellation create new history instead of rewriting signed versions.
+- Counselling decisions must identify the same patient and satisfy the counselling
+  profile and decision rules.
+- Invitation operations enforce recipient, caller-role, PET-validity, and current
+  status rules. Only the addressed trusted person can accept or reject an invitation.
+- Paper-signing Bundles contain the matching business resource and Provenance.
+  Digital calls contain an ASiC-E Binary and follow the stage limitation above.
+- Invalid input and business-rule failures return an `OperationOutcome`. Successful
+  deletes return HTTP 204 without a body; successful PET cancellation returns HTTP
+  200 without a FHIR response body.
+
+## Endpoint example coverage
+
+The examples below cover every distinct request and response shape. Interactions
+that share a FHIR shape intentionally reuse the same example.
+
+| Interactions | Example or response shape |
+| --- | --- |
+| QuestionnaireResponse read, version-read, create, and update | [Create a pre-filled PET](#create-a-pre-filled-pet); the response is the stored QuestionnaireResponse with id and version metadata. |
+| QuestionnaireResponse, Task, and RelatedPerson delete | HTTP 204 with no body after the resource-specific authorization and state checks. |
+| QuestionnaireResponse search | [Search PETs](#search-pets), returning a searchset Bundle. |
+| QuestionnaireResponse paper and digital confirmation | [Confirm a digitally signed PET](#confirm-a-digitally-signed-pet); paper confirmation substitutes the documented collection `bundle`. Both return the shown Parameters references. |
+| QuestionnaireResponse cancellation | [Cancel a PET](#cancel-a-pet), returning HTTP 200 with no body. |
+| Observation create and search | [Register a counselling decision](#register-a-counselling-decision); search returns a searchset Bundle containing the same Observation shape. |
+| Task create and search | A profile-conformant request Task is returned with HTTP 201; search returns those Task resources in a searchset Bundle. |
+| Task accept and reject | [Search and accept a trusted-person invitation](#search-and-accept-a-trusted-person-invitation); reject has no input and returns `task` and `trustedPerson` references. |
+| RelatedPerson read and search | The [paper-confirmation](#confirm-a-paper-signed-trusted-person) RelatedPerson shape is returned directly or inside a searchset Bundle. |
+| RelatedPerson paper confirmation | [Confirm a paper-signed trusted person](#confirm-a-paper-signed-trusted-person), returning `relatedPerson` and `provenance` references. |
+| Provenance search and includes | A searchset Bundle contains matching Provenance entries; requested Binary or RelatedPerson includes use search mode `include`. |
+| All validation and business-rule failures | [OperationOutcome](#errors), interpreted together with the HTTP status. |
+
 ## Request and response examples
 
 The examples below are trimmed, illustrative excerpts. Production request bodies must conform to the linked profiles, and requests must include the environment-specific authorization and tracing headers.
@@ -304,6 +342,98 @@ Content-Type: application/fhir+json
 ```
 
 The result contains references named `relatedPerson` and `provenance`.
+
+### Create and search trusted-person invitations
+
+```http
+POST /ahd/fhir/Task
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Task",
+  "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/trustee-request-task"] },
+  "status": "requested",
+  "intent": "order",
+  "focus": { "reference": "QuestionnaireResponse/ahd123" },
+  "for": { "reference": "Patient/123" },
+  "requestedPerformer": [{ "reference": { "reference": "RelatedPerson/ahd900" } }]
+}
+```
+
+HTTP 201 returns the stored Task with its assigned id. A search such as
+`GET /ahd/fhir/Task?requestedperformer-reference=RelatedPerson/ahd900&status=requested`
+returns those resources in a searchset Bundle. Successful rejection returns:
+
+```json
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    { "name": "task", "valueReference": { "reference": "Task/ahd321" } },
+    { "name": "trustedPerson", "valueReference": { "reference": "RelatedPerson/ahd900" } }
+  ]
+}
+```
+
+### Search trusted persons and signature metadata
+
+```http
+GET /ahd/fhir/RelatedPerson?patient=Patient/123&active=true&_revinclude=Provenance:target
+Accept: application/fhir+json
+```
+
+```json
+{
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "total": 1,
+  "entry": [{
+    "resource": {
+      "resourceType": "RelatedPerson",
+      "id": "ahd900",
+      "active": true,
+      "patient": { "reference": "Patient/123" }
+    },
+    "search": { "mode": "match" }
+  }]
+}
+```
+
+Signature metadata can be queried together with its Binary and RelatedPerson:
+
+```http
+GET /ahd/fhir/Provenance?target=RelatedPerson/ahd900&_include=Provenance:entity:Binary&_include=Provenance:target:RelatedPerson
+Accept: application/fhir+json
+```
+
+```json
+{
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "total": 1,
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "ahd901",
+        "target": [{ "reference": "RelatedPerson/ahd900" }],
+        "recorded": "2026-08-31T10:05:00Z",
+        "agent": [{ "who": { "reference": "PractitionerRole/77" } }],
+        "entity": [{ "role": "source", "what": { "reference": "Binary/ahd902" } }]
+      },
+      "search": { "mode": "match" }
+    },
+    {
+      "resource": {
+        "resourceType": "Binary",
+        "id": "ahd902",
+        "contentType": "application/vnd.etsi.asic-e+zip",
+        "data": "UEtQVA=="
+      },
+      "search": { "mode": "include" }
+    }
+  ]
+}
+```
 
 ## Errors
 
