@@ -1,0 +1,61 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "ahd-complete",
+  "url": "https://fhir.ee/ahd/OperationDefinition/ahd-complete",
+  "version": "1.0.0",
+  "name": "AHDQuestionnaireResponseComplete",
+  "title": "PET confirmation ($complete)",
+  "status": "active",
+  "kind": "operation",
+  "experimental": false,
+  "publisher": "TEHIK",
+  "description": "UC-AHD-055: confirms a patient's end-of-life directive (PET). Input is exactly one of: a digitally signed PET as a Binary (signedBinary) or a QuestionnaireResponse and Provenance collection Bundle for paper signing (bundle).",
+  "affectsState": true,
+  "code": "complete",
+  "resource": ["QuestionnaireResponse"],
+  "system": false,
+  "type": true,
+  "instance": true,
+  "parameter": [
+    {
+      "name": "signedBinary",
+      "use": "in",
+      "min": 0,
+      "max": "1",
+      "documentation": "Digitally signed PET (ASiC-E container) as a Binary resource.",
+      "type": "Binary"
+    },
+    {
+      "name": "bundle",
+      "use": "in",
+      "min": 0,
+      "max": "1",
+      "documentation": "Collection Bundle with the QuestionnaireResponse and the paper-signing Provenance.",
+      "type": "Bundle"
+    },
+    {
+      "name": "questionnaireResponse",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored PET version.",
+      "type": "Reference"
+    },
+    {
+      "name": "provenance",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored signing Provenance.",
+      "type": "Reference"
+    },
+    {
+      "name": "signedBinary",
+      "use": "out",
+      "min": 0,
+      "max": "1",
+      "documentation": "Reference to the stored signed Binary (digital signing only).",
+      "type": "Reference"
+    }
+  ]
+}
