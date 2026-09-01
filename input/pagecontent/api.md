@@ -276,33 +276,33 @@ the profile-conformant collection Bundle instead of `signedBinary`:
       "timestamp": "2026-08-31T10:05:00Z",
       "entry": [
         {
-          "fullUrl": "https://example.test/ahd/fhir/QuestionnaireResponse/ahd123",
+          "fullUrl": "urn:uuid:11111111-1111-4111-8111-111111111111",
           "resource": {
             "resourceType": "QuestionnaireResponse",
             "id": "ahd123",
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] },
             "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0",
             "status": "completed",
-            "subject": { "reference": "Patient/123" },
-            "author": { "reference": "Patient/123" },
+            "subject": { "reference": "Patient/100" },
+            "author": { "reference": "Patient/100" },
             "language": "et"
           }
         },
         {
-          "fullUrl": "https://example.test/ahd/fhir/Provenance/pet-signature",
+          "fullUrl": "urn:uuid:33333333-3333-4333-8333-333333333333",
           "resource": {
             "resourceType": "Provenance",
             "id": "pet-signature",
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signature-provenance"] },
-            "target": [{ "reference": "https://example.test/ahd/fhir/QuestionnaireResponse/ahd123" }],
+            "target": [{ "reference": "urn:uuid:11111111-1111-4111-8111-111111111111" }],
             "occurredDateTime": "2026-08-31T10:05:00Z",
-            "patient": { "reference": "Patient/123" },
+            "patient": { "reference": "Patient/100" },
             "agent": [{
               "role": [{ "coding": [{
                 "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
                 "code": "datasubject"
               }] }],
-              "who": { "reference": "Patient/123" }
+              "who": { "reference": "Patient/100" }
             }]
           }
         }
@@ -407,7 +407,7 @@ Content-Type: application/fhir+json
       "timestamp": "2026-08-31T10:05:00Z",
       "entry": [
         {
-          "fullUrl": "https://example.test/ahd/fhir/RelatedPerson/ahd900",
+          "fullUrl": "urn:uuid:22222222-2222-4222-8222-222222222222",
           "resource": {
             "resourceType": "RelatedPerson",
             "id": "ahd900",
@@ -422,7 +422,7 @@ Content-Type: application/fhir+json
                 "valueCode": "completed"
               }
             ],
-            "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "49002010965" }],
+            "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "48905059995" }],
             "active": true,
             "patient": { "reference": "Patient/123" },
             "relationship": [{
@@ -431,12 +431,12 @@ Content-Type: application/fhir+json
           }
         },
         {
-          "fullUrl": "https://example.test/ahd/fhir/Provenance/trustee-signature",
+          "fullUrl": "urn:uuid:33333333-3333-4333-8333-333333333333",
           "resource": {
             "resourceType": "Provenance",
             "id": "trustee-signature",
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signature-provenance"] },
-            "target": [{ "reference": "https://example.test/ahd/fhir/RelatedPerson/ahd900" }],
+            "target": [{ "reference": "urn:uuid:22222222-2222-4222-8222-222222222222" }],
             "occurredDateTime": "2026-08-31T10:05:00Z",
             "patient": { "reference": "Patient/123" },
             "agent": [{
@@ -444,7 +444,7 @@ Content-Type: application/fhir+json
                 "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
                 "code": "datasubject"
               }] }],
-              "who": { "reference": "https://example.test/ahd/fhir/RelatedPerson/ahd900" }
+              "who": { "reference": "urn:uuid:22222222-2222-4222-8222-222222222222" }
             }]
           }
         }
