@@ -26,8 +26,8 @@ Profile: [AHD content](StructureDefinition-ahd-content.html)
 | `PUT /QuestionnaireResponse/{id}` | Update a pre-filled PET (UC-AHD-050). | Path id and resource id must identify the same PET; only a permitted pre-filled state may be changed. |
 | `DELETE /QuestionnaireResponse/{id}` | Delete a pre-filled PET (UC-AHD-051). | Only the state permitted by the PET business rules can be deleted. |
 | `GET /QuestionnaireResponse` | Search PETs (UC-AHD-052). | At least `patient` or `_id` is required. |
-| `POST /QuestionnaireResponse/$complete` | Confirm a paper-signed PET (UC-AHD-055). | Input contains exactly one `bundle` parameter. |
-| `POST /QuestionnaireResponse/{id}/$complete` | Confirm a digitally signed PET (UC-AHD-055). | Input contains exactly one `signedBinary` parameter. |
+| `POST /QuestionnaireResponse/$complete` | Confirm a new PET (UC-AHD-055). | Input contains exactly one `bundle` (paper) or `signedBinary` (digital) parameter. |
+| `POST /QuestionnaireResponse/{id}/$complete` | Confirm an existing PET (UC-AHD-055). | Input contains exactly one `bundle` (paper) or `signedBinary` (digital) parameter. |
 | `POST /QuestionnaireResponse/{id}/$cancel` | Cancel a confirmed PET (UC-AHD-056). | No input parameters; creates a new version with `entered-in-error`. |
 
 Operations: [PET confirmation](OperationDefinition-ahd-complete.html) and [PET cancellation](OperationDefinition-ahd-cancel.html).
@@ -42,10 +42,10 @@ Search parameters:
 | `_count` | `0..1` | Page size; default 20, maximum 200. `_count=0` returns only the total. |
 | `_page` | `0..1` | One-based page number. |
 | `_summary` | `0..1` | `true` or `false`. `true` omits answers and tags the result `SUBSETTED`. |
-| `_sort` | `0..1` | `_lastUpdated` (alias `date`) and `_id`; prefix with `-` for descending order. |
+| `_sort` | `0..1` | `_lastUpdated` (alias `date`) and `_id`; comma-separated keys are supported and `-` selects descending order. |
 | `_revinclude` | `0..1` | Supported value: `Provenance:target`; includes the PET signature metadata when available. |
 
-QuestionnaireResponse does not support filtering by `_lastUpdated`; that field is available only as a sort key.
+QuestionnaireResponse does not support filtering by `_lastUpdated`; that field is available only as a sort key. `_profile` is not supported.
 
 Unsupported `_include`, `_elements`, `_contained` and `_containedType` parameters produce an `OperationOutcome`. Other `_revinclude` values are rejected.
 
@@ -150,8 +150,8 @@ Digital completion of a PET and digital acceptance of a trusted-person invitatio
 - Paper-signing Bundles contain the matching business resource and Provenance.
   Digital calls contain an ASiC-E Binary and follow the stage limitation above.
 - Invalid input and business-rule failures return an `OperationOutcome`. Successful
-  deletes return HTTP 204 without a body; successful PET cancellation returns HTTP
-  200 without a FHIR response body.
+  deletes return HTTP 200 or 204 without a body, depending on the FHIR adapter;
+  successful PET cancellation returns HTTP 200 without a FHIR response body.
 
 ## Endpoint example coverage
 
@@ -161,9 +161,9 @@ that share a FHIR shape intentionally reuse the same example.
 | Interactions | Example or response shape |
 | --- | --- |
 | QuestionnaireResponse read, version-read, create, and update | [Create a pre-filled PET](#create-a-pre-filled-pet); the response is the stored QuestionnaireResponse with id and version metadata. |
-| QuestionnaireResponse, Task, and RelatedPerson delete | HTTP 204 with no body after the resource-specific authorization and state checks. |
+| QuestionnaireResponse, Task, and RelatedPerson delete | HTTP 200 or 204 with no body after the resource-specific authorization and state checks. |
 | QuestionnaireResponse search | [Search PETs](#search-pets), returning a searchset Bundle. |
-| QuestionnaireResponse paper and digital confirmation | [Confirm a digitally signed PET](#confirm-a-digitally-signed-pet); paper confirmation substitutes the documented collection `bundle`. Both return the shown Parameters references. |
+| QuestionnaireResponse paper and digital confirmation | The endpoint selects a new or existing PET; exactly one paper `bundle` or digital `signedBinary` selects the signing variant. Digital completion additionally returns a Binary reference. |
 | QuestionnaireResponse cancellation | [Cancel a PET](#cancel-a-pet), returning HTTP 200 with no body. |
 | Observation create and search | [Register a counselling decision](#register-a-counselling-decision); search returns a searchset Bundle containing the same Observation shape. |
 | Task create and search | A profile-conformant request Task is returned with HTTP 201; search returns those Task resources in a searchset Bundle. |
@@ -244,11 +244,14 @@ Content-Type: application/fhir+json
       "resourceType": "Binary",
       "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signed-binary"] },
       "contentType": "application/vnd.etsi.asic-e+zip",
-      "data": "UEsDBBQAAAAAAIVdIV2KIflFHwAAAB8AAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi92bmQuZXRzaS5hc2ljLWUremlwUEsDBBQAAAAIAIVdIV1pW4BcuwAAAC8BAAAaAAAAcXVlc3Rpb25uYWlyZXJlc3BvbnNlLmpzb26Fjz1PAzEYg/+L5/TSwpYNqQMjXxtiCDlfE3RN0jdvBlTuv6NsIAZW23psXyFspUvgy2clHB47m6aSs0/CJ7ZaciMM0gwHH+fDzS0MzlQPd0WVsqSVcK+IqrU5a5eYZCKtj7N9VulBu/DIJeU0uEPfhZKVWfG2GVx+FsL94VyE9teo3d398esw7ac9DJp67Q0OoZzrSuU8xP7+waBjoHChMIdBfvCamNWOC5uB7xqL/BNafT51fxoOFds3UEsBAhQAFAAAAAAAhV0hXYoh+UUfAAAAHwAAAAgAAAAAAAAAAAAAAAAAAAAAAG1pbWV0eXBlUEsBAhQAFAAAAAgAhV0hXWlbgFy7AAAALwEAABoAAAAAAAAAAAAAAAAARQAAAHF1ZXN0aW9ubmFpcmVyZXNwb25zZS5qc29uUEsFBgAAAAACAAIAfgAAADgBAAAAAA=="
+      "data": "UEsDBBQAAAAAALR8IV2KIflFHwAAAB8AAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi92bmQuZXRzaS5hc2ljLWUremlwUEsDBBQAAAAIALR8IV2zYavh6wAAAJgBAAAaAAAAcXVlc3Rpb25uYWlyZXJlc3BvbnNlLmpzb26UkDFPwzAUhP/LzW7SwuYN1IGRAlvVwSSXxMi10+dnRBXy35E3kJAQ693pO90tEOZUpOPLdSYsDoVZfYrReeET85xiJgx8Dws39bubWxicqQ52wSxp8IGwR0yqc7ZtO0xeGrJ1U98+q5ROi3DPwUdfuVXfdCkqo+K0GvBDGbNPEfa4oEiA/Rcr+zGy3/R+9OpCuMLg3YXC+5QCXYRVKVxPBpfvy34puQjbH+s3dw/7z12zbbYwyOq0ZFh06TwHKvsqltc3dlqfEA4Uxq6SH516Rm3rV6uBKzol+SMUXByLG6tDxfoFAAD//wMAUEsBAhQAFAAAAAAAtHwhXYoh+UUfAAAAHwAAAAgAAAAAAAAAAAAAAAAAAAAAAG1pbWV0eXBlUEsBAhQAFAAAAAgAtHwhXbNhq+HrAAAAmAEAABoAAAAAAAAAAAAAAAAARQAAAHF1ZXN0aW9ubmFpcmVyZXNwb25zZS5qc29uUEsFBgAAAAACAAIAfgAAAGgBAAAAAA=="
     }
   }]
 }
 ```
+
+Digital confirmation returns the completed PET, signing Provenance, and stored ASiC-E
+Binary references:
 
 ```json
 {
@@ -261,8 +264,10 @@ Content-Type: application/fhir+json
 }
 ```
 
-For paper signing, call the type-level `/QuestionnaireResponse/$complete` operation and supply
-the profile-conformant collection Bundle instead of `signedBinary`:
+For a new paper-signed PET, call the type-level `/QuestionnaireResponse/$complete`
+operation and supply the profile-conformant collection Bundle. Either endpoint accepts
+exactly one `bundle` or `signedBinary`; the endpoint determines whether the PET is new
+or existing, while the parameter determines the signing variant:
 
 ```json
 {
@@ -283,8 +288,8 @@ the profile-conformant collection Bundle instead of `signedBinary`:
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] },
             "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0",
             "status": "completed",
-            "subject": { "reference": "Patient/100" },
-            "author": { "reference": "Patient/100" },
+            "subject": { "reference": "Patient/123" },
+            "author": { "reference": "Patient/123" },
             "language": "et"
           }
         },
@@ -296,19 +301,31 @@ the profile-conformant collection Bundle instead of `signedBinary`:
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signature-provenance"] },
             "target": [{ "reference": "urn:uuid:11111111-1111-4111-8111-111111111111" }],
             "occurredDateTime": "2026-08-31T10:05:00Z",
-            "patient": { "reference": "Patient/100" },
+            "patient": { "reference": "Patient/123" },
             "agent": [{
               "role": [{ "coding": [{
                 "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
                 "code": "datasubject"
               }] }],
-              "who": { "reference": "Patient/100" }
+              "who": { "reference": "Patient/123" }
             }]
           }
         }
       ]
     }
   }]
+}
+```
+
+Paper confirmation returns only the completed PET and signing Provenance references:
+
+```json
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    { "name": "questionnaireResponse", "valueReference": { "reference": "QuestionnaireResponse/ahd123/_history/1" } },
+    { "name": "provenance", "valueReference": { "reference": "Provenance/ahd456/_history/1" } }
+  ]
 }
 ```
 
@@ -422,7 +439,7 @@ Content-Type: application/fhir+json
                 "valueCode": "completed"
               }
             ],
-            "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "48905059995" }],
+            "identifier": [{ "system": "https://fhir.ee/sid/pid/est/ni", "value": "49002010965" }],
             "active": true,
             "patient": { "reference": "Patient/123" },
             "relationship": [{
