@@ -119,15 +119,15 @@ Profiles: [Trusted-person signature Provenance](StructureDefinition-ahd-trustee-
 
 | Method and path | Description | Main business rules |
 | --- | --- | --- |
-| `GET /Provenance` | Search trusted-person signature metadata (UC-AHD-061). | At least `target` or `_id` is required. |
+| `GET /Provenance` | Search PET or trusted-person signature metadata (UC-AHD-052 and UC-AHD-061). | At least `target` or `_id` is required. |
 
 Search parameters:
 
 | Parameter | Cardinality | Description |
 | --- | --- | --- |
-| `target` | `0..1` | Signed `RelatedPerson/{id}`. Chained RelatedPerson identifier, patient and active parameters are supported. |
+| `target` | `0..1` | Signed `QuestionnaireResponse/{id}` or `RelatedPerson/{id}`. Chained RelatedPerson identifier, patient and active parameters are supported for trusted-person searches. |
 | `_id` | `0..1` | Provenance logical id; required when `target` is absent. |
-| `_include` | `0..*` | `Provenance:entity:Binary` and `Provenance:target:RelatedPerson`. |
+| `_include` | `0..*` | `Provenance:entity:Binary` for either target type and `Provenance:target:RelatedPerson` for trusted-person searches. |
 
 `Patient` appears in the CapabilityStatement only to resolve chained `patient.identifier` searches. PET does not expose Patient resource interactions.
 
@@ -242,8 +242,9 @@ Content-Type: application/fhir+json
     "name": "signedBinary",
     "resource": {
       "resourceType": "Binary",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signed-binary"] },
       "contentType": "application/vnd.etsi.asic-e+zip",
-      "data": "{base64-encoded-container}"
+      "data": "UEsDBBQAAAAAAIVdIV2KIflFHwAAAB8AAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi92bmQuZXRzaS5hc2ljLWUremlwUEsDBBQAAAAIAIVdIV1pW4BcuwAAAC8BAAAaAAAAcXVlc3Rpb25uYWlyZXJlc3BvbnNlLmpzb26Fjz1PAzEYg/+L5/TSwpYNqQMjXxtiCDlfE3RN0jdvBlTuv6NsIAZW23psXyFspUvgy2clHB47m6aSs0/CJ7ZaciMM0gwHH+fDzS0MzlQPd0WVsqSVcK+IqrU5a5eYZCKtj7N9VulBu/DIJeU0uEPfhZKVWfG2GVx+FsL94VyE9teo3d398esw7ac9DJp67Q0OoZzrSuU8xP7+waBjoHChMIdBfvCamNWOC5uB7xqL/BNafT51fxoOFds3UEsBAhQAFAAAAAAAhV0hXYoh+UUfAAAAHwAAAAgAAAAAAAAAAAAAAAAAAAAAAG1pbWV0eXBlUEsBAhQAFAAAAAgAhV0hXWlbgFy7AAAALwEAABoAAAAAAAAAAAAAAAAARQAAAHF1ZXN0aW9ubmFpcmVyZXNwb25zZS5qc29uUEsFBgAAAAACAAIAfgAAADgBAAAAAA=="
     }
   }]
 }
@@ -253,14 +254,63 @@ Content-Type: application/fhir+json
 {
   "resourceType": "Parameters",
   "parameter": [
-    { "name": "questionnaireResponse", "valueReference": { "reference": "QuestionnaireResponse/ahd123" } },
-    { "name": "provenance", "valueReference": { "reference": "Provenance/ahd456" } },
-    { "name": "signedBinary", "valueReference": { "reference": "Binary/ahd789" } }
+    { "name": "questionnaireResponse", "valueReference": { "reference": "QuestionnaireResponse/ahd123/_history/2" } },
+    { "name": "provenance", "valueReference": { "reference": "Provenance/ahd456/_history/1" } },
+    { "name": "signedBinary", "valueReference": { "reference": "Binary/ahd789/_history/1" } }
   ]
 }
 ```
 
-For paper signing, call the type-level `/QuestionnaireResponse/$complete` operation and supply `bundle` instead of `signedBinary`. The collection Bundle contains one AHD `QuestionnaireResponse` and one signing `Provenance`.
+For paper signing, call the type-level `/QuestionnaireResponse/$complete` operation and supply
+the profile-conformant collection Bundle instead of `signedBinary`:
+
+```json
+{
+  "resourceType": "Parameters",
+  "parameter": [{
+    "name": "bundle",
+    "resource": {
+      "resourceType": "Bundle",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signed-bundle"] },
+      "type": "collection",
+      "timestamp": "2026-08-31T10:05:00Z",
+      "entry": [
+        {
+          "fullUrl": "https://example.test/ahd/fhir/QuestionnaireResponse/ahd123",
+          "resource": {
+            "resourceType": "QuestionnaireResponse",
+            "id": "ahd123",
+            "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-content"] },
+            "questionnaire": "https://fhir.ee/qre/Questionnaire-AHD|1.0.0",
+            "status": "completed",
+            "subject": { "reference": "Patient/123" },
+            "author": { "reference": "Patient/123" },
+            "language": "et"
+          }
+        },
+        {
+          "fullUrl": "https://example.test/ahd/fhir/Provenance/pet-signature",
+          "resource": {
+            "resourceType": "Provenance",
+            "id": "pet-signature",
+            "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-signature-provenance"] },
+            "target": [{ "reference": "https://example.test/ahd/fhir/QuestionnaireResponse/ahd123" }],
+            "occurredDateTime": "2026-08-31T10:05:00Z",
+            "patient": { "reference": "Patient/123" },
+            "agent": [{
+              "role": [{ "coding": [{
+                "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
+                "code": "datasubject"
+              }] }],
+              "who": { "reference": "Patient/123" }
+            }]
+          }
+        }
+      ]
+    }
+  }]
+}
+```
 
 ### Cancel a PET
 
@@ -318,14 +368,27 @@ Content-Type: application/fhir+json
     "name": "signedBinary",
     "resource": {
       "resourceType": "Binary",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-binary"] },
       "contentType": "application/vnd.etsi.asic-e+zip",
-      "data": "{base64-encoded-container}"
+      "data": "UEsDBBQAAAAAAKtiIV2KIflFHwAAAB8AAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi92bmQuZXRzaS5hc2ljLWUremlwUEsDBBQAAAAIAKtiIV2UrmR9KgEAAFwCAAASAAAAcmVsYXRlZHBlcnNvbi5qc29unZHNTsMwEITfZc8JTsuPVF/LGUrLrcrBiidkpdQO9rqiqvLuyGkLCCEkuHlnteNvdo8UEH0KDZ4PA0jTGr0R2BVC9I4KYkuaTGcXVUUF7SCG9JGG4FvuQXpLncgQtVJtx+EKUKazaiMhNZIC7tGyY2Hvsl5KSFEAqseC8CZwkb0jvT1SCj3pP3m9JsRcOMMBZUAcvIv50SLANaCC9qZPWH8I+kifXU1PXw3W5/lsPZtf0zgW/4E6ByyjGEnxgrD0Nn/Y+N3QQ2BprAsyjfAepCUkFDQYYTj5zrg6yWpCyseAE24ZYVpaPETB7gfEyFYNbBWiKMcXDNJ0s6iqeTWrFne3E0TI12bvYsfDZNl4y+7ld/ccZzM1le+x4zLC56zNKeby8YHGeqzHd1BLAQIUABQAAAAAAKtiIV2KIflFHwAAAB8AAAAIAAAAAAAAAAAAAAAAAAAAAABtaW1ldHlwZVBLAQIUABQAAAAIAKtiIV2UrmR9KgEAAFwCAAASAAAAAAAAAAAAAAAAAEUAAAByZWxhdGVkcGVyc29uLmpzb25QSwUGAAAAAAIAAgB2AAAAnwEAAAAA"
     }
   }]
 }
 ```
 
-The result is a Parameters resource containing references named `task`, `relatedPerson`, `provenance` and `signedBinary`.
+The result contains version-specific references:
+
+```json
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    { "name": "task", "valueReference": { "reference": "Task/ahd321/_history/2" } },
+    { "name": "relatedPerson", "valueReference": { "reference": "RelatedPerson/ahd900/_history/1" } },
+    { "name": "provenance", "valueReference": { "reference": "Provenance/ahd901/_history/1" } },
+    { "name": "signedBinary", "valueReference": { "reference": "Binary/ahd902/_history/1" } }
+  ]
+}
+```
 
 ### Confirm a paper-signed trusted person
 
@@ -339,11 +402,15 @@ Content-Type: application/fhir+json
     "name": "bundle",
     "resource": {
       "resourceType": "Bundle",
+      "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-bundle"] },
       "type": "collection",
+      "timestamp": "2026-08-31T10:05:00Z",
       "entry": [
         {
+          "fullUrl": "https://example.test/ahd/fhir/RelatedPerson/ahd900",
           "resource": {
             "resourceType": "RelatedPerson",
+            "id": "ahd900",
             "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee"] },
             "extension": [
               {
@@ -363,14 +430,41 @@ Content-Type: application/fhir+json
             }]
           }
         },
-        { "resource": { "resourceType": "Provenance" } }
+        {
+          "fullUrl": "https://example.test/ahd/fhir/Provenance/trustee-signature",
+          "resource": {
+            "resourceType": "Provenance",
+            "id": "trustee-signature",
+            "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signature-provenance"] },
+            "target": [{ "reference": "https://example.test/ahd/fhir/RelatedPerson/ahd900" }],
+            "occurredDateTime": "2026-08-31T10:05:00Z",
+            "patient": { "reference": "Patient/123" },
+            "agent": [{
+              "role": [{ "coding": [{
+                "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
+                "code": "datasubject"
+              }] }],
+              "who": { "reference": "https://example.test/ahd/fhir/RelatedPerson/ahd900" }
+            }]
+          }
+        }
       ]
     }
   }]
 }
 ```
 
-The result contains references named `relatedPerson` and `provenance`.
+The result contains version-specific references:
+
+```json
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    { "name": "relatedPerson", "valueReference": { "reference": "RelatedPerson/ahd900/_history/1" } },
+    { "name": "provenance", "valueReference": { "reference": "Provenance/ahd901/_history/1" } }
+  ]
+}
+```
 
 ### Create and search trusted-person invitations
 
@@ -399,8 +493,8 @@ returns those resources in a searchset Bundle. Successful rejection returns:
 {
   "resourceType": "Parameters",
   "parameter": [
-    { "name": "task", "valueReference": { "reference": "Task/ahd321" } },
-    { "name": "trustedPerson", "valueReference": { "reference": "RelatedPerson/ahd900" } }
+    { "name": "task", "valueReference": { "reference": "Task/ahd321/_history/2" } },
+    { "name": "trustedPerson", "valueReference": { "reference": "RelatedPerson/ahd900/_history/1" } }
   ]
 }
 ```
@@ -444,7 +538,14 @@ Accept: application/fhir+json
 }
 ```
 
-Signature metadata can be queried together with its Binary and RelatedPerson:
+PET signature metadata can be queried by `QuestionnaireResponse` target and include its Binary:
+
+```http
+GET /ahd/fhir/Provenance?target=QuestionnaireResponse/ahd123&_include=Provenance:entity:Binary
+Accept: application/fhir+json
+```
+
+Trusted-person signature metadata can additionally include its RelatedPerson target:
 
 ```http
 GET /ahd/fhir/Provenance?target=RelatedPerson/ahd900&_include=Provenance:entity:Binary&_include=Provenance:target:RelatedPerson
@@ -461,9 +562,17 @@ Accept: application/fhir+json
       "resource": {
         "resourceType": "Provenance",
         "id": "ahd901",
+        "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signature-provenance"] },
         "target": [{ "reference": "RelatedPerson/ahd900" }],
-        "recorded": "2026-08-31T10:05:00Z",
-        "agent": [{ "who": { "reference": "PractitionerRole/77" } }],
+        "occurredDateTime": "2026-08-31T10:05:00Z",
+        "patient": { "reference": "Patient/123" },
+        "agent": [{
+          "role": [{ "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/extra-security-role-type",
+            "code": "datasubject"
+          }] }],
+          "who": { "reference": "RelatedPerson/ahd900" }
+        }],
         "entity": [{ "role": "source", "what": { "reference": "Binary/ahd902" } }]
       },
       "search": { "mode": "match" }
@@ -472,8 +581,9 @@ Accept: application/fhir+json
       "resource": {
         "resourceType": "Binary",
         "id": "ahd902",
+        "meta": { "profile": ["https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-binary"] },
         "contentType": "application/vnd.etsi.asic-e+zip",
-        "data": "UEtQVA=="
+        "data": "UEsDBBQAAAAAAKtiIV2KIflFHwAAAB8AAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi92bmQuZXRzaS5hc2ljLWUremlwUEsDBBQAAAAIAKtiIV2UrmR9KgEAAFwCAAASAAAAcmVsYXRlZHBlcnNvbi5qc29unZHNTsMwEITfZc8JTsuPVF/LGUrLrcrBiidkpdQO9rqiqvLuyGkLCCEkuHlnteNvdo8UEH0KDZ4PA0jTGr0R2BVC9I4KYkuaTGcXVUUF7SCG9JGG4FvuQXpLncgQtVJtx+EKUKazaiMhNZIC7tGyY2Hvsl5KSFEAqseC8CZwkb0jvT1SCj3pP3m9JsRcOMMBZUAcvIv50SLANaCC9qZPWH8I+kifXU1PXw3W5/lsPZtf0zgW/4E6ByyjGEnxgrD0Nn/Y+N3QQ2BprAsyjfAepCUkFDQYYTj5zrg6yWpCyseAE24ZYVpaPETB7gfEyFYNbBWiKMcXDNJ0s6iqeTWrFne3E0TI12bvYsfDZNl4y+7ld/ccZzM1le+x4zLC56zNKeby8YHGeqzHd1BLAQIUABQAAAAAAKtiIV2KIflFHwAAAB8AAAAIAAAAAAAAAAAAAAAAAAAAAABtaW1ldHlwZVBLAQIUABQAAAAIAKtiIV2UrmR9KgEAAFwCAAASAAAAAAAAAAAAAAAAAEUAAAByZWxhdGVkcGVyc29uLmpzb25QSwUGAAAAAAIAAgB2AAAAnwEAAAAA"
       },
       "search": { "mode": "include" }
     }
