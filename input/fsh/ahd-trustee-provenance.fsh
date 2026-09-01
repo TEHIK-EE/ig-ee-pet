@@ -15,7 +15,7 @@ Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provena
 * meta.tag 0..0
 * implicitRules 0..0
 * language 0..0
-* text 0..0
+* text 0..1
 * contained 0..0
 * extension 0..0
 * modifierExtension 0..0

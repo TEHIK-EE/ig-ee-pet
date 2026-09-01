@@ -37,6 +37,7 @@ Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson
 * patient ^type.targetProfile = "https://fhir.ee/mpi/StructureDefinition/ee-mpi-patient-verified"
 
 * relationship 1..1
+* relationship from https://fhir.ee/ValueSet/isiku-seos-patsiendiga (required)
 * relationship.id 0..0
 * relationship.extension 0..0
 * relationship.text 0..0
