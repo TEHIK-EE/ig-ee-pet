@@ -1,0 +1,37 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "ahd-task-reject",
+  "url": "https://fhir.ee/ahd/OperationDefinition/ahd-task-reject",
+  "version": "1.0.0",
+  "name": "AHDTrusteeInvitationReject",
+  "title": "Trusted person invitation rejection ($reject)",
+  "status": "active",
+  "kind": "operation",
+  "experimental": false,
+  "publisher": "TEHIK",
+  "description": "UC-AHD-060 alternative flow 2.2.1: the invitation recipient rejects the trusted person invitation. The operation accepts no input parameters.",
+  "affectsState": true,
+  "code": "reject",
+  "resource": ["Task"],
+  "system": false,
+  "type": false,
+  "instance": true,
+  "parameter": [
+    {
+      "name": "task",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the rejected invitation version.",
+      "type": "Reference"
+    },
+    {
+      "name": "trustedPerson",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the rejected trusted person version.",
+      "type": "Reference"
+    }
+  ]
+}

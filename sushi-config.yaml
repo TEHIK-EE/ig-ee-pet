@@ -56,6 +56,8 @@ dependencies:
 pages:
   index.md:
     title: Home
+  api.md:
+    title: PET FHIR API
 #   implementation.xml:
 #   examples.xml:
 #     title: Examples Overview
@@ -86,6 +88,7 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
+  PET FHIR API: api.html
   Artifacts: artifacts.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮

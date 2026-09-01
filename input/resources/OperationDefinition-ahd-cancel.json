@@ -1,0 +1,19 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "ahd-cancel",
+  "url": "https://fhir.ee/ahd/OperationDefinition/ahd-cancel",
+  "version": "1.0.0",
+  "name": "AHDQuestionnaireResponseCancel",
+  "title": "PET cancellation ($cancel)",
+  "status": "active",
+  "kind": "operation",
+  "experimental": false,
+  "publisher": "TEHIK",
+  "description": "UC-AHD-056: cancels a confirmed patient's end-of-life directive (PET). A new version with status entered-in-error is created. The operation accepts no input parameters and answers HTTP 200 with an empty body.",
+  "affectsState": true,
+  "code": "cancel",
+  "resource": ["QuestionnaireResponse"],
+  "system": false,
+  "type": false,
+  "instance": true
+}

@@ -1,0 +1,11 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "ahd-counseling-last",
+  "url": "https://fhir.ee/ahd/SearchParameter/ahd-counseling-last",
+  "name": "AhdCounselingLast",
+  "status": "active",
+  "description": "Custom parameter (UC-AHD-054): last=true returns only the chronologically latest valid counselling decision for the patient and linked persons.",
+  "code": "last",
+  "base": ["Observation"],
+  "type": "token"
+}

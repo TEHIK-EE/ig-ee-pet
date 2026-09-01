@@ -1,0 +1,45 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "ahd-trustee-confirm",
+  "url": "https://fhir.ee/ahd/OperationDefinition/ahd-trustee-confirm",
+  "version": "1.0.0",
+  "name": "AHDTrusteeConfirm",
+  "title": "Trusted person confirmation by a healthcare worker ($confirm)",
+  "status": "active",
+  "kind": "operation",
+  "experimental": false,
+  "publisher": "TEHIK",
+  "description": "UC-AHD-058: a healthcare worker adds and confirms a trusted person who signed on paper during the appointment. Input is a collection Bundle with the RelatedPerson and the paper-signing Provenance.",
+  "affectsState": true,
+  "code": "confirm",
+  "resource": ["RelatedPerson"],
+  "system": false,
+  "type": true,
+  "instance": false,
+  "parameter": [
+    {
+      "name": "bundle",
+      "use": "in",
+      "min": 1,
+      "max": "1",
+      "documentation": "Collection Bundle with the RelatedPerson and the paper-signing Provenance.",
+      "type": "Bundle"
+    },
+    {
+      "name": "relatedPerson",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored trusted person version.",
+      "type": "Reference"
+    },
+    {
+      "name": "provenance",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored signing Provenance.",
+      "type": "Reference"
+    }
+  ]
+}

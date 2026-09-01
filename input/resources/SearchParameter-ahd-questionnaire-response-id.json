@@ -1,0 +1,13 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "ahd-questionnaire-response-id",
+  "url": "https://fhir.ee/ahd/SearchParameter/ahd-questionnaire-response-id",
+  "version": "1.0.0",
+  "name": "AhdQuestionnaireResponseId",
+  "status": "active",
+  "description": "Search for trusted-person invitations (Task) and trusted persons (RelatedPerson) by PET (QuestionnaireResponse) id. The relation runs through the trusted person and is resolved by the PET search service, so expression is deliberately unset.",
+  "code": "ahd-questionnaire-response-id",
+  "base": ["Task", "RelatedPerson"],
+  "type": "token",
+  "processingMode": "normal"
+}

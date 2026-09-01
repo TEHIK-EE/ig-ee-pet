@@ -1,0 +1,61 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "ahd-task-complete",
+  "url": "https://fhir.ee/ahd/OperationDefinition/ahd-task-complete",
+  "version": "1.0.0",
+  "name": "AHDTrusteeInvitationComplete",
+  "title": "Trusted person invitation acceptance ($complete)",
+  "status": "draft",
+  "kind": "operation",
+  "experimental": false,
+  "publisher": "TEHIK",
+  "description": "UC-AHD-060: the invitation recipient accepts the trusted person invitation with a digitally signed RelatedPerson (ASiC-E container). Under the stage-1 mock configuration, the operation parses the container without DigiDoc signature verification and stores it locally instead of DRIT. Where digital signing is not enabled, the operation responds with HTTP 501.",
+  "affectsState": true,
+  "code": "complete",
+  "resource": ["Task"],
+  "system": false,
+  "type": false,
+  "instance": true,
+  "parameter": [
+    {
+      "name": "signedBinary",
+      "use": "in",
+      "min": 1,
+      "max": "1",
+      "documentation": "Digitally signed trusted person (ASiC-E container) as a Binary resource.",
+      "type": "Binary"
+    },
+    {
+      "name": "task",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the completed invitation (Task) version.",
+      "type": "Reference"
+    },
+    {
+      "name": "relatedPerson",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the confirmed trusted person (RelatedPerson) version.",
+      "type": "Reference"
+    },
+    {
+      "name": "provenance",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored signing Provenance.",
+      "type": "Reference"
+    },
+    {
+      "name": "signedBinary",
+      "use": "out",
+      "min": 1,
+      "max": "1",
+      "documentation": "Reference to the stored signed Binary (the ASiC-E container).",
+      "type": "Reference"
+    }
+  ]
+}
