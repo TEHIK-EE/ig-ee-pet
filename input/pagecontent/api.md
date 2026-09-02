@@ -180,7 +180,7 @@ The examples below are trimmed, illustrative excerpts. Production request bodies
 ### Search PETs
 
 ```http
-GET /ahd/fhir/QuestionnaireResponse?patient=Patient/123&status=completed&_count=20&_sort=-_lastUpdated&_revinclude=Provenance:target
+GET /ahd/fhir/QuestionnaireResponse?patient=Patient/123&status=completed&_count=20&_sort=-_lastUpdated&_revinclude=Provenance:target HTTP/1.1
 Accept: application/fhir+json
 ```
 
@@ -208,7 +208,7 @@ Accept: application/fhir+json
 ### Create a pre-filled PET
 
 ```http
-POST /ahd/fhir/QuestionnaireResponse
+POST /ahd/fhir/QuestionnaireResponse HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -233,7 +233,7 @@ The response body is the stored `QuestionnaireResponse` with its assigned id, ve
 ### Confirm a digitally signed PET
 
 ```http
-POST /ahd/fhir/QuestionnaireResponse/ahd123/$complete
+POST /ahd/fhir/QuestionnaireResponse/ahd123/$complete HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -332,7 +332,7 @@ Paper confirmation returns only the completed PET and signing Provenance referen
 ### Cancel a PET
 
 ```http
-POST /ahd/fhir/QuestionnaireResponse/ahd123/$cancel
+POST /ahd/fhir/QuestionnaireResponse/ahd123/$cancel HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -349,7 +349,7 @@ The operation creates a new `QuestionnaireResponse` version with status `entered
 ### Register a counselling decision
 
 ```http
-POST /ahd/fhir/Observation
+POST /ahd/fhir/Observation HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -369,14 +369,14 @@ Successful creation returns HTTP 201 and the stored Observation with its assigne
 ### Search and accept a trusted-person invitation
 
 ```http
-GET /ahd/fhir/Task?requestedperformer-reference.identifier=https://fhir.ee/sid/pid/est/ni|{national-id}&status=requested
+GET /ahd/fhir/Task?requestedperformer-reference.identifier=https://fhir.ee/sid/pid/est/ni|{national-id}&status=requested HTTP/1.1
 Accept: application/fhir+json
 ```
 
 The response is a searchset Bundle of matching Task resources. To accept an invitation:
 
 ```http
-POST /ahd/fhir/Task/ahd321/$complete
+POST /ahd/fhir/Task/ahd321/$complete HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -410,7 +410,7 @@ The result contains version-specific references:
 ### Confirm a paper-signed trusted person
 
 ```http
-POST /ahd/fhir/RelatedPerson/$confirm
+POST /ahd/fhir/RelatedPerson/$confirm HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -486,7 +486,7 @@ The result contains version-specific references:
 ### Create and search trusted-person invitations
 
 ```http
-POST /ahd/fhir/Task
+POST /ahd/fhir/Task HTTP/1.1
 Content-Type: application/fhir+json
 
 {
@@ -519,7 +519,7 @@ returns those resources in a searchset Bundle. Successful rejection returns:
 ### Search trusted persons and signature metadata
 
 ```http
-GET /ahd/fhir/RelatedPerson?patient=Patient/123&active=true&_revinclude=Provenance:target
+GET /ahd/fhir/RelatedPerson?patient=Patient/123&active=true&_revinclude=Provenance:target HTTP/1.1
 Accept: application/fhir+json
 ```
 
@@ -558,14 +558,14 @@ Accept: application/fhir+json
 PET signature metadata can be queried by `QuestionnaireResponse` target and include its Binary:
 
 ```http
-GET /ahd/fhir/Provenance?target=QuestionnaireResponse/ahd123&_include=Provenance:entity:Binary
+GET /ahd/fhir/Provenance?target=QuestionnaireResponse/ahd123&_include=Provenance:entity:Binary HTTP/1.1
 Accept: application/fhir+json
 ```
 
 Trusted-person signature metadata can additionally include its RelatedPerson target:
 
 ```http
-GET /ahd/fhir/Provenance?target=RelatedPerson/ahd900&_include=Provenance:entity:Binary&_include=Provenance:target:RelatedPerson
+GET /ahd/fhir/Provenance?target=RelatedPerson/ahd900&_include=Provenance:entity:Binary&_include=Provenance:target:RelatedPerson HTTP/1.1
 Accept: application/fhir+json
 ```
 
