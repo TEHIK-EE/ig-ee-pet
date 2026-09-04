@@ -1,7 +1,7 @@
 Extension: AHDQuestionnaireResponseReference
 Id: ahd-questionnaire-response-reference
-Title: "Tahteavalduse vorm"
-Description: "Viide PETile, millega usaldusisik on seotud."
+Title: "AHD content reference"
+Description: "Reference to the content that the trustee is connected with."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-questionnaire-response-reference"
 * ^status = #draft
 * ^version = "1.0.0"

@@ -1,7 +1,7 @@
 Extension: AHDWitnessReference
 Id: ahd-witness-reference
-Title: "Tunnistaja"
-Description: "Tunnistaja, kui patsiendi tahteavalduse kinnitamisel on tunnistaja olemas."
+Title: "AHD witness reference"
+Description: "Reference to the witness if a witness was used in the AHD signing process"
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-witness-reference"
 * ^status = #draft
 * ^version = "1.0.0"

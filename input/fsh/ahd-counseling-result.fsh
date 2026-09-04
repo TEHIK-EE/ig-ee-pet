@@ -1,8 +1,8 @@
 Profile: AHDCounselingResult
 Parent: Observation
 Id: ahd-counseling-result
-Title: "PET nõustamise otsus"
-Description: "Nõustamise otsus: kas patsiendil on lubatud PET kinnitada, ja kui ei ole, siis põhjus."
+Title: "AHD consultation result (Observation)"
+Description: "AHD consultation data stating whether the patient is allowed to sign their decision. If the consultant decides the patient should not be able to sign their document, the consultant must provide a reason."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-counseling-result"
 * ^status = #draft
 * ^version = "1.0.0"

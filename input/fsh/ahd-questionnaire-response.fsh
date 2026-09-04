@@ -1,8 +1,8 @@
 Profile: AHDQuestionnaireResponse
 Parent: QuestionnaireResponse
 Id: ahd-content
-Title: "Patsiendi elulõpu tahteavaldus"
-Description: "Patsiendi elulõpu tahteavalduse lõplik ja kinnitatav sisu."
+Title: "AHD content (QuestionnaireResponse)"
+Description: "The actual content of the AHD and the patient's wishes"
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-content"
 * ^version = "1.0.0"
 * ^status = #draft

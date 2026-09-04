@@ -1,8 +1,8 @@
 Profile: AHDSignedBinary
 Parent: Binary
 Id: ahd-signed-binary
-Title: "Allkirjastatud PET vorm"
-Description: "Allkirjastatud PET vorm asice containeris"
+Title: "AHD response signature (Binary)"
+Description: "Binary resource of the AHD questionnaire response in asice container"
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signed-binary"
 * ^status = #draft
 * ^version = "1.0.0"

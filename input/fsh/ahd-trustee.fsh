@@ -1,8 +1,8 @@
 Profile: AHDTrustee
 Parent: RelatedPerson
 Id: ahd-trustee
-Title: "Usaldusisik"
-Description: "Tahteavalduse koostaja jaoks määratud usaldusisik (RelatedPerson)."
+Title: "AHD trustee (RelatedPerson)"
+Description: "Patient can request a trustee who will represent thir wishes when the patient is incapable of doing so. Difference with witness: witness represents the patient in the AHD signing process when the trustee represents the patient's wishes when the AHD has activated."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee"
 * ^status = #draft
 * ^version = "1.0.0"

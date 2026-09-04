@@ -1,8 +1,8 @@
 Profile: TrusteeRequestTask
 Parent: Task
 Id: trustee-request-task
-Title: "Usaldusisiku kutse"
-Description: "Task ressurss, eesmärgiga edastada kutse inimesele olla patsiendi elulõputahteavalduse usaldusisik"
+Title: "AHD trustee request (Task)"
+Description: "The patient can request a person to be their representative in the AHD employing process. The request can be made by the patient or a healthcare practitioner and the performer will be the requested trustee."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/trustee-request-task"
 * ^status = #draft
 * ^version = "1.0.0"

@@ -1,7 +1,8 @@
 Profile: AHDTrusteeSignedBinary
 Parent: Binary
 Id: ahd-trustee-signed-binary
-Title: "Allkirjastatud nõusolek usaldusisikuks olemiseks"
+Title: "AHD trustee's signature (Binary)"
+Description: "Binary resource of the AHD RelatedPerson in asice container"
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-binary"
 * ^status = #draft
 * ^version = "1.0.0"

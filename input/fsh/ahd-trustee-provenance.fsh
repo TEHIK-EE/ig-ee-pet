@@ -1,8 +1,8 @@
 Profile: AHDTrusteeSignatureProvenance
 Parent: Provenance
 Id: ahd-trustee-signature-provenance
-Title: "Usaldusisiku allkirja andmed"
-Description: "Kui usaldusisik on nõus olema patsiendi usaldusisik, siis Provenance ressursiga edastatakse allkirjastamise andmed"
+Title: "AHD trustee's signature data (Provenance)"
+Description: "Data about the signing process when a person agrees to be a patient's trustee represeting their wishes."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signature-provenance"
 * ^status = #draft
 * ^version = "1.0.0"

@@ -1,8 +1,8 @@
 Profile: AHDWitness
 Parent: RelatedPerson
 Id: ahd-witness
-Title: "Tunnistaja"
-Description: "Tunnistaja PET tahteavalduse kontekstis. Keegi, kes annab patsiendi teovõime puudumise korral tahteavaldusele allkirja"
+Title: "AHD witness (RelatedPerson)"
+Description: "If the patient is physically incapable of filling out their AHD document and signing it (while being capable of decision-making), a witness must be provided who will fill out the content in paper form sign the document on their behalf. Difference with trustee: witness represents the patient in the AHD signing process when the trustee represents the patient's wishes when the AHD has activated."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-witness"
 * ^status = #draft
 * ^version = "1.0.0"

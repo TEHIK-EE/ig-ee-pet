@@ -1,8 +1,8 @@
 Profile: AHDSignedBundle
 Parent: Bundle
 Id: ahd-signed-bundle
-Title: "PET koos täidetud vormi ja täitja allkirjaga"
-Description: "Komplekt ressurssidest nagu PET vorm (questionnaireResponse) ja Provenance"
+Title: "AHD data bundle (Bundle)"
+Description: "Bundle of data consisting of questionnaire response and the signature"
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signed-bundle"
 * ^status = #draft
 * ^version = "1.0.0"

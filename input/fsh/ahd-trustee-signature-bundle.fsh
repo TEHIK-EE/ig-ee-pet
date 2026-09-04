@@ -1,7 +1,8 @@
 Profile: AHDTrusteeSignedBundle
 Parent: Bundle
 Id: ahd-trustee-signed-bundle
-Title: "Usaldusisiku edastamine koos paberallkirja andmetega"
+Title: "AHD trustee's data bundle (Bundle)"
+Description: "Bundle of data consisting of information who the trustee is and their signature agreeing to be the patient's representative."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-trustee-signed-bundle"
 * ^status = #draft
 * ^version = "1.0.0"

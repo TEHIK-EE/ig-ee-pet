@@ -1,8 +1,8 @@
 Profile: AHDSignatureProvenance
 Parent: Provenance
 Id: ahd-signature-provenance
-Title: "PET provenance"
-Description: "Allkirjastamise provenance profiil. Target on PET vorm (QuestionnaireResponse); allkirjastatud Binary artifakt on seotud entity.what kaudu."
+Title: "AHD signature data (Provenance)"
+Description: "Data about the signing process of the AHD questionnaire response. Provides info about when the signing occurred, whether the signer was the patient or a capable witness and the signature itself."
 * ^url = "https://fhir.ee/ahd/StructureDefinition/ahd-signature-provenance"
 * ^status = #draft
 * ^version = "1.0.0"
